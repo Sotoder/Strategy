@@ -22,6 +22,6 @@ public sealed class MouseInteractionPresenter : MonoBehaviour
         var selectable = hits
             .Select(hit => hit.collider.GetComponentInParent<ISelectable>())
             .FirstOrDefault(c => c != null);
-        _selectedObject.SetValue(selectable);
+        _selectedObject.SetValue(selectable); 
     }
 }

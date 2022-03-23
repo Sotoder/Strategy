@@ -42,7 +42,7 @@ namespace UserControlSystem
 
         private void OnDestroy()
         {
-            _selectedValue.OnSelected -= ONSelected;
+            _selectedValue.OnSelected -= ONSelected; 
         }
     }
 }
