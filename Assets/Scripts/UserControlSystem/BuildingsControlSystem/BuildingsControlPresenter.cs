@@ -34,5 +34,6 @@ public class BuildingsControlPresenter : MonoBehaviour
     {
         _selectedValue.OnCreateUnit -= CreateUnit;
         _selectedValue.OnSelected -= SelectBuilding;
+        _selectedValue.OnUnselected -= UnselectLastBuilding;
     }
 }

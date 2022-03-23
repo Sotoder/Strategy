@@ -8,7 +8,7 @@ namespace Abstractions
     {
         float Health { get; }
         float MaxHealth { get; }
-        Sprite Icon { get; }
+        Sprite Icon { get; } 
         Outline ObjectOutline { get; }
     }
 }

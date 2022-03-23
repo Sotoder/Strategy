@@ -18,7 +18,7 @@ namespace Core
         [SerializeField] private Sprite _icon;
 
         private float _health = 1000;
-        private Outline _outline;
+        private Outline _outline; 
 
         private void Start()
         {
