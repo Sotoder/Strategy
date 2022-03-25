@@ -2,13 +2,12 @@ using Abstractions;
 using UserControlSystem;
 using UnityEngine;
 
-public class BuildingsControlPresenter : MonoBehaviour
+public class BuildingsOutlinePresenter : MonoBehaviour
 {
     [SerializeField] private SelectableValue _selectedValue;
 
     private void Start()
     {
-        _selectedValue.OnCreateUnit += CreateUnit;
         _selectedValue.OnUnselected += UnselectLastBuilding;
         _selectedValue.OnSelected += SelectBuilding;
     }
@@ -25,14 +24,8 @@ public class BuildingsControlPresenter : MonoBehaviour
         target.ObjectOutline.DisableOutline();
     }
 
-    private void CreateUnit(IUnitProducer building)
-    {
-        building.ProduceUnit();
-    }
-
     private void OnDestroy()
     {
-        _selectedValue.OnCreateUnit -= CreateUnit;
         _selectedValue.OnSelected -= SelectBuilding;
         _selectedValue.OnUnselected -= UnselectLastBuilding;
     }

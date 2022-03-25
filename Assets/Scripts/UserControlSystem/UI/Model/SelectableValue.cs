@@ -10,7 +10,6 @@ namespace UserControlSystem
         public ISelectable CurrentValue { get; private set; }
         public Action<ISelectable> OnSelected;
         public Action<ISelectable> OnUnselected;
-        public Action<IUnitProducer> OnCreateUnit;
 
         private ISelectable _lastValue;
 
@@ -24,29 +23,6 @@ namespace UserControlSystem
                 OnUnselected?.Invoke(_lastValue);
                 _lastValue = CurrentValue;
             }
-
-            if (IsIUnitProducer(CurrentValue, out IUnitProducer building))
-            {
-                OnCreateUnit?.Invoke(building); 
-            }
-        }
-
-        private bool IsIUnitProducer(ISelectable selectable, out IUnitProducer building)
-        {
-            if(selectable is null)
-            {
-                building = null;
-                return false;
-            }
-
-            if (selectable is IUnitProducer) // Cast is bad, can we do it without cast?
-            {
-                building = selectable as IUnitProducer;
-                return true;
-            }
-
-            building = null;
-            return false;
         }
     }
 }

@@ -39,10 +39,5 @@ namespace UserControlSystem
                 _sliderFillImage.color = color;
             }
         }
-
-        private void OnDestroy()
-        {
-            _selectedValue.OnSelected -= ONSelected; 
-        }
     }
 }
