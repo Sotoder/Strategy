@@ -45,14 +45,59 @@ namespace UserControlSystem.UI.Presenter
 
         private void ONButtonClick(ICommandExecutor commandExecutor)
         {
-            var unitProducer = commandExecutor as CommandExecutorBase<IProduceUnitCommand>;
-            if (unitProducer != null)
+            var executorType = GetExecutorType(commandExecutor);
+
+            switch (executorType)
             {
-                unitProducer.ExecuteSpecificCommand(_context.Inject(new ProduceUnitCommand()));
-                return;
-            }
-            throw new ApplicationException($"{nameof(CommandButtonsPresenter)}.{nameof(ONButtonClick)}: " +
+                case ExecutorTypes.Produce:
+                    (commandExecutor as CommandExecutorBase<IProduceUnitCommand>).ExecuteSpecificCommand(_context.Inject(new ProduceUnitCommandHeir()));
+                    break;
+                case ExecutorTypes.Move:
+                    (commandExecutor as CommandExecutorBase<IMoveCommand>).ExecuteSpecificCommand(_context.Inject(new MoveCommand()));
+                    break;
+                case ExecutorTypes.Attack:
+                    (commandExecutor as CommandExecutorBase<IAttackCommand>).ExecuteSpecificCommand(_context.Inject(new AttackCommand()));
+                    break;
+                case ExecutorTypes.Patrol:
+                    (commandExecutor as CommandExecutorBase<IPatrolCommand>).ExecuteSpecificCommand(_context.Inject(new PatrolCommand()));
+                    break;
+                case ExecutorTypes.Stop:
+                    (commandExecutor as CommandExecutorBase<IStopCommand>).ExecuteSpecificCommand(_context.Inject(new StopCommand()));
+                    break;
+                case ExecutorTypes.None:
+                    throw new ApplicationException($"{nameof(CommandButtonsPresenter)}.{nameof(ONButtonClick)}: " +
                                            $"Unknown type of commands executor: {commandExecutor.GetType().FullName}!");
+            }
         }
+
+        private ExecutorTypes GetExecutorType(ICommandExecutor commandExecutor)
+        {
+            Type currentType = commandExecutor.GetType();
+            Type lastType = default;
+
+            while (currentType != typeof(MonoBehaviour))
+            {
+                lastType = currentType;
+                currentType = lastType.BaseType;
+            }
+            
+            //evade casts and play with BaseType
+            if (lastType == typeof(CommandExecutorBase<IProduceUnitCommand>)) return ExecutorTypes.Produce;
+            else if (lastType == typeof(CommandExecutorBase<IMoveCommand>)) return ExecutorTypes.Move;
+            else if (lastType == typeof(CommandExecutorBase<IAttackCommand>)) return ExecutorTypes.Attack;
+            else if (lastType == typeof(CommandExecutorBase<IPatrolCommand>)) return ExecutorTypes.Patrol;
+            else if (lastType == typeof(CommandExecutorBase<IStopCommand>)) return ExecutorTypes.Stop;
+            else return ExecutorTypes.None;
+        }
+    }
+
+    public enum ExecutorTypes
+    {
+        Produce = 0,
+        Move = 1,
+        Attack = 2,
+        Patrol = 3,
+        Stop = 4,
+        None = 99
     }
 }

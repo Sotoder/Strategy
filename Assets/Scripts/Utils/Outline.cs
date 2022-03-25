@@ -11,7 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace Tools
+namespace Utils
 {
     [DisallowMultipleComponent]
     public class Outline : MonoBehaviour

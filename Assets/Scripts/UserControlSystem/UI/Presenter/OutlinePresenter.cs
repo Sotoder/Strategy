@@ -2,7 +2,7 @@ using Abstractions;
 using UserControlSystem;
 using UnityEngine;
 
-public class BuildingsOutlinePresenter : MonoBehaviour
+public class OutlinePresenter : MonoBehaviour
 {
     [SerializeField] private SelectableValue _selectedValue;
 
