@@ -72,21 +72,21 @@ namespace UserControlSystem.UI.Presenter
 
         private ExecutorTypes GetExecutorType(ICommandExecutor commandExecutor)
         {
-            Type currentType = commandExecutor.GetType();
-            Type lastType = default;
+            Type currentBaseType = commandExecutor.GetType();
+            Type lastBaseType = default;
 
-            while (currentType != typeof(MonoBehaviour))
+            while (currentBaseType != typeof(MonoBehaviour))
             {
-                lastType = currentType;
-                currentType = lastType.BaseType;
+                lastBaseType = currentBaseType;
+                currentBaseType = lastBaseType.BaseType;
             }
             
             //evade casts and play with BaseType
-            if (lastType == typeof(CommandExecutorBase<IProduceUnitCommand>)) return ExecutorTypes.Produce;
-            else if (lastType == typeof(CommandExecutorBase<IMoveCommand>)) return ExecutorTypes.Move;
-            else if (lastType == typeof(CommandExecutorBase<IAttackCommand>)) return ExecutorTypes.Attack;
-            else if (lastType == typeof(CommandExecutorBase<IPatrolCommand>)) return ExecutorTypes.Patrol;
-            else if (lastType == typeof(CommandExecutorBase<IStopCommand>)) return ExecutorTypes.Stop;
+            if (lastBaseType == typeof(CommandExecutorBase<IProduceUnitCommand>)) return ExecutorTypes.Produce;
+            else if (lastBaseType == typeof(CommandExecutorBase<IMoveCommand>)) return ExecutorTypes.Move;
+            else if (lastBaseType == typeof(CommandExecutorBase<IAttackCommand>)) return ExecutorTypes.Attack;
+            else if (lastBaseType == typeof(CommandExecutorBase<IPatrolCommand>)) return ExecutorTypes.Patrol;
+            else if (lastBaseType == typeof(CommandExecutorBase<IStopCommand>)) return ExecutorTypes.Stop;
             else return ExecutorTypes.None;
         }
     }
