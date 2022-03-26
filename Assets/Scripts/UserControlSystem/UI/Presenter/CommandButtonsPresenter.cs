@@ -38,7 +38,7 @@ namespace UserControlSystem.UI.Presenter
             if (selectable != null)
             {
                 var commandExecutors = new List<ICommandExecutor>();
-                commandExecutors.AddRange((selectable as Component).GetComponentsInParent<ICommandExecutor>());
+                commandExecutors.AddRange(selectable.CommandExecutorsList);
                 _view.MakeLayout(commandExecutors);
             }
         }
@@ -50,19 +50,19 @@ namespace UserControlSystem.UI.Presenter
             switch (executorType)
             {
                 case ExecutorTypes.Produce:
-                    (commandExecutor as CommandExecutorBase<IProduceUnitCommand>).ExecuteSpecificCommand(_context.Inject(new ProduceUnitCommandHeir()));
+                    (commandExecutor as CommandExecutorBase<IProduceUnitCommand>).ExecuteSpecificCommand(_context.Inject(new ProduceUnitCommandHeir(), typeof(ProduceUnitCommand)));
                     break;
                 case ExecutorTypes.Move:
-                    (commandExecutor as CommandExecutorBase<IMoveCommand>).ExecuteSpecificCommand(_context.Inject(new MoveCommand()));
+                    (commandExecutor as CommandExecutorBase<IMoveCommand>).ExecuteSpecificCommand(_context.Inject(new MoveCommand(), typeof(MoveCommand)));
                     break;
                 case ExecutorTypes.Attack:
-                    (commandExecutor as CommandExecutorBase<IAttackCommand>).ExecuteSpecificCommand(_context.Inject(new AttackCommand()));
+                    (commandExecutor as CommandExecutorBase<IAttackCommand>).ExecuteSpecificCommand(_context.Inject(new AttackCommand(), typeof(AttackCommand)));
                     break;
                 case ExecutorTypes.Patrol:
-                    (commandExecutor as CommandExecutorBase<IPatrolCommand>).ExecuteSpecificCommand(_context.Inject(new PatrolCommand()));
+                    (commandExecutor as CommandExecutorBase<IPatrolCommand>).ExecuteSpecificCommand(_context.Inject(new PatrolCommand(), typeof(PatrolCommand)));
                     break;
                 case ExecutorTypes.Stop:
-                    (commandExecutor as CommandExecutorBase<IStopCommand>).ExecuteSpecificCommand(_context.Inject(new StopCommand()));
+                    (commandExecutor as CommandExecutorBase<IStopCommand>).ExecuteSpecificCommand(_context.Inject(new StopCommand(), typeof(StopCommand)));
                     break;
                 case ExecutorTypes.None:
                     throw new ApplicationException($"{nameof(CommandButtonsPresenter)}.{nameof(ONButtonClick)}: " +
@@ -75,7 +75,7 @@ namespace UserControlSystem.UI.Presenter
             Type currentBaseType = commandExecutor.GetType();
             Type lastBaseType = default;
 
-            while (currentBaseType != typeof(MonoBehaviour))
+            while (currentBaseType != typeof(object))
             {
                 lastBaseType = currentBaseType;
                 currentBaseType = lastBaseType.BaseType;

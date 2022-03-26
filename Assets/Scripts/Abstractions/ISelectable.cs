@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using Abstractions.Commands;
+using System.Collections.Generic;
+using UnityEngine;
 using Utils;
 
 namespace Abstractions
@@ -9,5 +11,6 @@ namespace Abstractions
         float MaxHealth { get; }
         Sprite Icon { get; }
         Outline ObjectOutline { get; }
+        List<ICommandExecutor> CommandExecutorsList { get; }
     }
 }
