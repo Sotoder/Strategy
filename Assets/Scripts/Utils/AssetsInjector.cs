@@ -6,20 +6,27 @@ namespace Utils
     public static class AssetsInjector
     {
         private static readonly Type _injectAssetAttributeType = typeof(InjectAssetAttribute);
-        
+
         public static T Inject<T>(this AssetsContext context, T target)
         {
-            var targetType = target.GetType();
-            Type lastType = default;
+            return DoInject(context, target, typeof(T));
+        }
 
-            while (targetType != typeof(object))
+        public static T Inject<T>(this AssetsContext context, T target, Type targetType)
+        {
+            return DoInject(context, target, targetType);
+        }
+
+        private static T DoInject<T>(AssetsContext context, T target, Type targetType)
+        {
+            var currentType = target.GetType();
+
+            while (currentType != targetType)
             {
-                lastType = targetType;
-                targetType = lastType.BaseType;
+                currentType = currentType.BaseType;
             }
 
-
-            var allFields = lastType.GetFields(BindingFlags.NonPublic 
+            var allFields = currentType.GetFields(BindingFlags.NonPublic 
                                                  | BindingFlags.Public 
                                                  | BindingFlags.Instance);
 

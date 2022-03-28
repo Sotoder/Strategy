@@ -38,7 +38,7 @@ namespace UserControlSystem.UI.Presenter
             if (selectable != null)
             {
                 var commandExecutors = new List<ICommandExecutor>();
-                commandExecutors.AddRange((selectable as Component).GetComponentsInParent<ICommandExecutor>());
+                commandExecutors.AddRange(selectable.CommandExecutorsList);
                 _view.MakeLayout(commandExecutors);
             }
         }
@@ -50,7 +50,7 @@ namespace UserControlSystem.UI.Presenter
             switch (executorType)
             {
                 case ExecutorTypes.Produce:
-                    (commandExecutor as CommandExecutorBase<IProduceUnitCommand>).ExecuteSpecificCommand(_context.Inject(new ProduceUnitCommandHeir()));
+                    (commandExecutor as CommandExecutorBase<IProduceUnitCommand>).ExecuteSpecificCommand(_context.Inject(new ProduceUnitCommandHeir(), typeof(ProduceUnitCommand)));
                     break;
                 case ExecutorTypes.Move:
                     (commandExecutor as CommandExecutorBase<IMoveCommand>).ExecuteSpecificCommand(_context.Inject(new MoveCommand()));
@@ -75,7 +75,7 @@ namespace UserControlSystem.UI.Presenter
             Type currentBaseType = commandExecutor.GetType();
             Type lastBaseType = default;
 
-            while (currentBaseType != typeof(MonoBehaviour))
+            while (currentBaseType != typeof(object))
             {
                 lastBaseType = currentBaseType;
                 currentBaseType = lastBaseType.BaseType;
@@ -89,15 +89,11 @@ namespace UserControlSystem.UI.Presenter
             else if (lastBaseType == typeof(CommandExecutorBase<IStopCommand>)) return ExecutorTypes.Stop;
             else return ExecutorTypes.None;
         }
-    }
 
-    public enum ExecutorTypes
-    {
-        Produce = 0,
-        Move = 1,
-        Attack = 2,
-        Patrol = 3,
-        Stop = 4,
-        None = 99
+        private void OnDestroy()
+        {
+            _selectable.OnSelected -= ONSelected;
+            _view.OnClick -= ONButtonClick;
+        }
     }
 }

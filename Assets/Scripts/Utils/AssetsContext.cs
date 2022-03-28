@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -7,11 +8,11 @@ namespace Utils
     [CreateAssetMenu(fileName = nameof(AssetsContext), menuName = "Strategy Game/" + nameof(AssetsContext), order = 0)]
     public sealed class AssetsContext : ScriptableObject
     {
-        [SerializeField] private Object[] _objects;
+        [SerializeField] private List<Object> _objects;
 
         public Object GetObjectOfType(Type targetType, string targetName = null)
         {
-            for (int i = 0; i < _objects.Length; i++)
+            for (int i = 0; i < _objects.Count; i++)
             {
                 var obj = _objects[i];
                 if (obj.GetType().IsAssignableFrom(targetType))
@@ -23,6 +24,11 @@ namespace Utils
                 }
             }
             return null;
+        }
+
+        public void AddObject(Object @object)
+        {
+            _objects.Add(@object);
         }
     }
 }

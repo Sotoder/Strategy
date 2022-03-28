@@ -1,6 +1,7 @@
 using Abstractions;
 using UserControlSystem;
 using UnityEngine;
+using Utils;
 
 public class OutlinePresenter : MonoBehaviour
 {
@@ -15,13 +16,19 @@ public class OutlinePresenter : MonoBehaviour
     private void SelectBuilding(ISelectable target)
     {
         if (target is null) return;
-        target.ObjectOutline.EnableOutLine();
+        if(target.gameObject.TryGetComponent<Outline>(out var outline))
+        {
+            outline.EnableOutLine(); 
+        }
     }
 
     private void UnselectLastBuilding(ISelectable target)
     {
         if (target is null) return;
-        target.ObjectOutline.DisableOutline();
+        if (target.gameObject.TryGetComponent<Outline>(out var outline))
+        {
+            outline.DisableOutline();
+        }
     }
 
     private void OnDestroy()

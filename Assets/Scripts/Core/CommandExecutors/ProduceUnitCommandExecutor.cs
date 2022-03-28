@@ -1,13 +1,14 @@
 using Abstractions.Commands;
 using Abstractions.Commands.CommandsInterfaces;
 using UnityEngine;
+using Utils;
 
-public class ProduceUnitCommandExecuter : CommandExecutorBase<IProduceUnitCommand>
+public class ProduceUnitCommandExecutor : CommandExecutorBase<IProduceUnitCommand>
 {
-    [SerializeField] private Transform _unitsParent;
+    [InjectAsset("UnitsRoot")] private GameObject _unitsParent;
     public override void ExecuteSpecificCommand(IProduceUnitCommand command)
-        => Instantiate(command.UnitPrefab,
+        => GameObject.Instantiate(command.UnitPrefab,
             new Vector3(Random.Range(-10, 10), 0, Random.Range(-10, 10)),
             Quaternion.identity,
-            _unitsParent);
+            _unitsParent.transform);
 }
