@@ -9,7 +9,6 @@ public sealed class MainBuilding : MonoBehaviour, ISelectable
     public float Health => _health;
     public float MaxHealth => _maxHealth;
     public Sprite Icon => _icon;
-    public Outline ObjectOutline => _outline;
     public List<ICommandExecutor> CommandExecutorsList => _commandExecutorsList;
 
     [SerializeField] private float _maxHealth = 1000;
@@ -19,11 +18,9 @@ public sealed class MainBuilding : MonoBehaviour, ISelectable
     private List<ICommandExecutor> _commandExecutorsList = new List<ICommandExecutor>();
 
     private float _health = 1000;
-    private Outline _outline;
 
     private void Start()
     {
-        _outline = gameObject.GetComponent<Outline>();
         _commandExecutorsList = _commandExecutorsConfig.GetCommandExecutorsList();
     }
 }

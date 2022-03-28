@@ -10,7 +10,7 @@ namespace Abstractions
         float Health { get; }
         float MaxHealth { get; }
         Sprite Icon { get; }
-        Outline ObjectOutline { get; }
+        GameObject gameObject { get; }
         List<ICommandExecutor> CommandExecutorsList { get; }
     }
 }
