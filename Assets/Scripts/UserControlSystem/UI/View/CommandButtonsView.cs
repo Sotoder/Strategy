@@ -18,34 +18,33 @@ namespace UserControlSystem.UI.View
         [SerializeField] private GameObject _stopButton;
         [SerializeField] private GameObject _produceUnitButton;
 
-        private Dictionary<Type, GameObject> _buttonsByExecutorType;
+        private Dictionary<Type, Button> _buttonsByExecutorType;
 
         private void Start()
         {
-            _buttonsByExecutorType = new Dictionary<Type, GameObject>();
+            _buttonsByExecutorType = new Dictionary<Type, Button>();
             _buttonsByExecutorType
-                .Add(typeof(CommandExecutorBase<IAttackCommand>), _attackButton);
+                .Add(typeof(CommandExecutorBase<IAttackCommand>), _attackButton.GetComponent<Button>());
             _buttonsByExecutorType
-                .Add(typeof(CommandExecutorBase<IMoveCommand>), _moveButton);
+                .Add(typeof(CommandExecutorBase<IMoveCommand>), _moveButton.GetComponent<Button>());
             _buttonsByExecutorType
-                .Add(typeof(CommandExecutorBase<IPatrolCommand>), _patrolButton);
+                .Add(typeof(CommandExecutorBase<IPatrolCommand>), _patrolButton.GetComponent<Button>());
             _buttonsByExecutorType
-                .Add(typeof(CommandExecutorBase<IStopCommand>), _stopButton);
+                .Add(typeof(CommandExecutorBase<IStopCommand>), _stopButton.GetComponent<Button>());
             _buttonsByExecutorType
-                .Add(typeof(CommandExecutorBase<IProduceUnitCommand>), _produceUnitButton);
+                .Add(typeof(CommandExecutorBase<IProduceUnitCommand>), _produceUnitButton.GetComponent<Button>());
         }
 
         public void MakeLayout(IEnumerable<ICommandExecutor> commandExecutors)
         {
             foreach (var currentExecutor in commandExecutors)
             {
-                var buttonGameObject = _buttonsByExecutorType
+                var button = _buttonsByExecutorType
                     .First(type => type
                         .Key
                         .IsInstanceOfType(currentExecutor))
                     .Value;
-                buttonGameObject.SetActive(true);
-                var button = buttonGameObject.GetComponent<Button>();
+                button.gameObject.SetActive(true);
                 button.onClick.AddListener(() => OnClick?.Invoke(currentExecutor));
             }
         }
@@ -54,9 +53,14 @@ namespace UserControlSystem.UI.View
         {
             foreach (var kvp in _buttonsByExecutorType)
             {
-                kvp.Value.GetComponent<Button>().onClick.RemoveAllListeners();
-                kvp.Value.SetActive(false);
+                kvp.Value.onClick.RemoveAllListeners();
+                kvp.Value.gameObject.SetActive(false);
             }
+        }
+
+        private void OnDestroy()
+        {
+            Clear();
         }
     }
 }

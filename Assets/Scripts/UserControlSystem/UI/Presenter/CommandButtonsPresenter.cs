@@ -53,16 +53,16 @@ namespace UserControlSystem.UI.Presenter
                     (commandExecutor as CommandExecutorBase<IProduceUnitCommand>).ExecuteSpecificCommand(_context.Inject(new ProduceUnitCommandHeir(), typeof(ProduceUnitCommand)));
                     break;
                 case ExecutorTypes.Move:
-                    (commandExecutor as CommandExecutorBase<IMoveCommand>).ExecuteSpecificCommand(_context.Inject(new MoveCommand(), typeof(MoveCommand)));
+                    (commandExecutor as CommandExecutorBase<IMoveCommand>).ExecuteSpecificCommand(_context.Inject(new MoveCommand()));
                     break;
                 case ExecutorTypes.Attack:
-                    (commandExecutor as CommandExecutorBase<IAttackCommand>).ExecuteSpecificCommand(_context.Inject(new AttackCommand(), typeof(AttackCommand)));
+                    (commandExecutor as CommandExecutorBase<IAttackCommand>).ExecuteSpecificCommand(_context.Inject(new AttackCommand()));
                     break;
                 case ExecutorTypes.Patrol:
-                    (commandExecutor as CommandExecutorBase<IPatrolCommand>).ExecuteSpecificCommand(_context.Inject(new PatrolCommand(), typeof(PatrolCommand)));
+                    (commandExecutor as CommandExecutorBase<IPatrolCommand>).ExecuteSpecificCommand(_context.Inject(new PatrolCommand()));
                     break;
                 case ExecutorTypes.Stop:
-                    (commandExecutor as CommandExecutorBase<IStopCommand>).ExecuteSpecificCommand(_context.Inject(new StopCommand(), typeof(StopCommand)));
+                    (commandExecutor as CommandExecutorBase<IStopCommand>).ExecuteSpecificCommand(_context.Inject(new StopCommand()));
                     break;
                 case ExecutorTypes.None:
                     throw new ApplicationException($"{nameof(CommandButtonsPresenter)}.{nameof(ONButtonClick)}: " +
@@ -89,15 +89,11 @@ namespace UserControlSystem.UI.Presenter
             else if (lastBaseType == typeof(CommandExecutorBase<IStopCommand>)) return ExecutorTypes.Stop;
             else return ExecutorTypes.None;
         }
-    }
 
-    public enum ExecutorTypes
-    {
-        Produce = 0,
-        Move = 1,
-        Attack = 2,
-        Patrol = 3,
-        Stop = 4,
-        None = 99
+        private void OnDestroy()
+        {
+            _selectable.OnSelected -= ONSelected;
+            _view.OnClick -= ONButtonClick;
+        }
     }
 }

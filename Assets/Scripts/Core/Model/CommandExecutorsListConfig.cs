@@ -19,31 +19,31 @@ public class CommandExecutorsListConfig : ScriptableObject
     {
         if (_isProduceUnit)
         {
-            var produceExecutor = _context.Inject(new ProduceUnitCommandExecutor(), typeof(ProduceUnitCommandExecutor));
+            var produceExecutor = _context.Inject(new ProduceUnitCommandExecutor());
             _commandExecutorsList.Add(produceExecutor);
         }
 
         if (_isMove)
         {
-            var moveExecutor = _context.Inject(new MoveCommandExecutor(), typeof(MoveCommandExecutor));
+            var moveExecutor = _context.Inject(new MoveCommandExecutor());
             _commandExecutorsList.Add(moveExecutor);
         }
 
         if (_isAttack)
         {
-            var attackExecutor = _context.Inject(new AttackCommandExecutor(), typeof(AttackCommandExecutor));
+            var attackExecutor = _context.Inject(new AttackCommandExecutor());
             _commandExecutorsList.Add(attackExecutor);
         }
 
         if (_isPatrol)
         {
-            var patrolExecutor = _context.Inject(new PatrolCommandExecutor(), typeof(PatrolCommandExecutor));
+            var patrolExecutor = _context.Inject(new PatrolCommandExecutor());
             _commandExecutorsList.Add(patrolExecutor);
         }
 
         if (_isStop)
         {
-            var holdExecutor = _context.Inject(new HoldCommandExecutor(), typeof(HoldCommandExecutor));
+            var holdExecutor = _context.Inject(new HoldCommandExecutor());
             _commandExecutorsList.Add(holdExecutor);
         }
 
