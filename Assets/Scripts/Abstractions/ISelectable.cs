@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using Utils;
 
 namespace Abstractions
 {
@@ -8,6 +7,5 @@ namespace Abstractions
         float Health { get; }
         float MaxHealth { get; }
         Sprite Icon { get; }
-        Outline ObjectOutline { get; }
     }
 }

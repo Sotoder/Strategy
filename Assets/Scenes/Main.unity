@@ -169,6 +169,8 @@ MonoBehaviour:
   _camera: {fileID: 963194227}
   _selectedObject: {fileID: 11400000, guid: 7141aae4b16134e49af0215b6da77bcf, type: 2}
   _eventSystem: {fileID: 467524304}
+  _groundClicksRMB: {fileID: 11400000, guid: 2b897e41a5c34e9419c18e2f8d7cd113, type: 2}
+  _groundTransform: {fileID: 2003567869}
 --- !u!1 &168921228
 GameObject:
   m_ObjectHideFlags: 0
@@ -291,10 +293,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 178689800}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 082704343f1c693408b7cbde36cf10ea, type: 3}
+  m_Script: {fileID: 11500000, guid: dd864a92fab8c7c4cb3c8922d1eb193e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _selectedValue: {fileID: 11400000, guid: 7141aae4b16134e49af0215b6da77bcf, type: 2}
+  _selectableValue: {fileID: 11400000, guid: 7141aae4b16134e49af0215b6da77bcf, type: 2}
 --- !u!4 &178689802
 Transform:
   m_ObjectHideFlags: 0
@@ -405,6 +407,17 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 338527692}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &359387069 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1789433167, guid: a84953a7ca0738a4eab2dd7252b2bb0d, type: 3}
+  m_PrefabInstance: {fileID: 6267617246477557965}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &467524302
 GameObject:
   m_ObjectHideFlags: 0
@@ -1070,6 +1083,17 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1470633674}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1475135247 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -6013785518103879737, guid: 9a14e11fe7e23784fb5e913d6bb456ee, type: 3}
+  m_PrefabInstance: {fileID: 6287441856808254802}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1522323736
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1496,6 +1520,69 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2078215733
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2078215735}
+  - component: {fileID: 2078215734}
+  m_Layer: 0
+  m_Name: SceneContext
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2078215734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2078215733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89715ad69b973a14899afa2c6730b30b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scriptableObjectInstallers: []
+  _monoInstallers:
+  - {fileID: 5122495236470536562}
+  _installerPrefabs: []
+  _autoRun: 1
+  OnPreInstall:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPostInstall:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPreResolve:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPostResolve:
+    m_PersistentCalls:
+      m_Calls: []
+  _parentNewObjectsUnderSceneContext: 0
+  _contractNames: []
+  _parentContractNames: []
+--- !u!4 &2078215735
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2078215733}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &5122495236470536561
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1749,6 +1836,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5dd235a43d36f9347a1a35df441f10d9, type: 3}
+--- !u!114 &5122495236470536562 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 227755229944066459, guid: 5dd235a43d36f9347a1a35df441f10d9, type: 3}
+  m_PrefabInstance: {fileID: 5122495236470536561}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b99c41e13e5d4bc69af2196d211358b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &6267617246477557965
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1756,6 +1854,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1834126935}
     m_Modifications:
+    - target: {fileID: -1049929542943699085, guid: a84953a7ca0738a4eab2dd7252b2bb0d, type: 3}
+      propertyPath: _outlineComponents.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -1049929542943699085, guid: a84953a7ca0738a4eab2dd7252b2bb0d, type: 3}
+      propertyPath: _outlineComponents.Array.data[0]
+      value: 
+      objectReference: {fileID: 359387069}
     - target: {fileID: 3723548393113684202, guid: a84953a7ca0738a4eab2dd7252b2bb0d, type: 3}
       propertyPath: _unitsParent
       value: 
@@ -1817,6 +1923,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1748817644}
     m_Modifications:
+    - target: {fileID: 3596493062161579315, guid: 9a14e11fe7e23784fb5e913d6bb456ee, type: 3}
+      propertyPath: _outlineComponents.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3596493062161579315, guid: 9a14e11fe7e23784fb5e913d6bb456ee, type: 3}
+      propertyPath: _outlineComponents.Array.data[0]
+      value: 
+      objectReference: {fileID: 1475135247}
     - target: {fileID: 6287441856403058840, guid: 9a14e11fe7e23784fb5e913d6bb456ee, type: 3}
       propertyPath: m_Name
       value: Chomper

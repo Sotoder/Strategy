@@ -5,7 +5,5 @@ using UnityEngine;
 public class MoveCommandExecuter : CommandExecutorBase<IMoveCommand>
 {
     public override void ExecuteSpecificCommand(IMoveCommand command)
-    {
-        Debug.Log("Unit move");
-    }
+        => Debug.Log($"{name} is moving to {command.Target}!");
 }
