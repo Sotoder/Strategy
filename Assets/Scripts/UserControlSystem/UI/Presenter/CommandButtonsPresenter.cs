@@ -9,9 +9,10 @@ namespace UserControlSystem.UI.Presenter
 {
     public sealed class CommandButtonsPresenter : MonoBehaviour
     {
-        [SerializeField] private SelectableValue _selectable;
         [SerializeField] private CommandButtonsView _view;
+
         [Inject] private CommandButtonsModel _model;
+        [Inject] private SelectableValue _selectable;
         private ISelectable _currentSelectable;
         
         private void Start()
@@ -21,7 +22,7 @@ namespace UserControlSystem.UI.Presenter
             _model.OnCommandCancel += _view.UnblockAllInteractions;
             _model.OnCommandAccepted += _view.BlockInteractions;
 
-            _selectable.OnSelected += ONSelected;
+            _selectable.OnValueChange += ONSelected;
             ONSelected(_selectable.CurrentValue);
         }
 
