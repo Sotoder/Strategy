@@ -7,14 +7,14 @@ namespace UserControlSystem.CommandsRealization
     public class AttackCommand : IAttackCommand
     {
         public Vector3 Target { get; }
-        public ISelectableEnemy Enemy { get; }
+        public IAttackable Enemy { get; }
 
         public AttackCommand(Vector3 target)
         {
             Target = target;
         }
 
-        public AttackCommand(ISelectableEnemy enemy)
+        public AttackCommand(IAttackable enemy)
         {
             Enemy = enemy;
         }

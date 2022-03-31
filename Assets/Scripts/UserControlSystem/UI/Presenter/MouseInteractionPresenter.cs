@@ -50,12 +50,14 @@ public sealed class MouseInteractionPresenter : MonoBehaviour
             {
                 return;
             }
-            var selectable = hits
-                .Select(hit => hit.collider.GetComponentInParent<ISelectableEnemy>())
+
+            var attackable = hits
+                .Select(hit => hit.collider.GetComponentInParent<IAttackable>())
                 .FirstOrDefault(c => c != null);
-            if (selectable != null)
+
+            if (attackable != null && attackable.IsEnemy)
             {
-                _selectedEnemy.SetValue(selectable);
+                _selectedEnemy.SetValue(attackable);
             } 
             else if (_groundPlane.Raycast(ray, out var enter))
             {

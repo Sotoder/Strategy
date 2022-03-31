@@ -8,16 +8,12 @@ namespace UserControlSystem.CommandsRealization
     {
         public List<Vector3> PatrolPoints { get; }
 
-        public PatrolCommand(Vector3 target)
+        public PatrolCommand(Vector3 start, Vector3 end)
         {
             PatrolPoints = new List<Vector3>();
 
-            PatrolPoints.Add(target);
-        }
-
-        public void SetStartPosition(Vector3 startPosition)
-        {
-            PatrolPoints.Add(startPosition);
+            PatrolPoints.Add(start);
+            PatrolPoints.Add(end);
         }
     }
 }

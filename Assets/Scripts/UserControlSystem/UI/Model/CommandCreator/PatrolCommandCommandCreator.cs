@@ -18,7 +18,7 @@ namespace UserControlSystem
 
         private void ONNewValue(Vector3 groundClick)
         {
-            _creationCallback?.Invoke(_context.Inject(new PatrolCommand(groundClick)));
+            _creationCallback?.Invoke(_context.Inject(new PatrolCommand(_commandExecutor.transform.position, groundClick)));
             _creationCallback = null;
         }
 

@@ -28,6 +28,14 @@ public sealed class OutlineSelector : MonoBehaviour
         _isSelectedCache = isSelected;
     }
 
+    public void SetColor(Color color)
+    {
+        for (int i = 0; i < _outlineComponents.Length; i++)
+        {
+            _outlineComponents[i].OutlineColor = color;
+        }
+    }
+
     private void DisableOutline()
     {
         for (int i = 0; i < _outlineComponents.Length; i++)
