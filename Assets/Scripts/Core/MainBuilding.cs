@@ -1,7 +1,7 @@
 using Abstractions;
 using UnityEngine;
 
-public sealed class MainBuilding : MonoBehaviour, IAttackable
+public sealed class MainBuilding : MonoBehaviour, IAttackable, ISelectable
 {
     public float Health => _health;
     public float MaxHealth => _maxHealth;
