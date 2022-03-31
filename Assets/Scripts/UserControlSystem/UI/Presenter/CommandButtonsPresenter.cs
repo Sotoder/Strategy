@@ -39,7 +39,7 @@ namespace UserControlSystem.UI.Presenter
             _currentSelectable = selectable;
 
             _view.Clear();
-            if (selectable != null)
+            if (selectable != null && !selectable.IsEnemy)
             {
                 var commandExecutors = new List<ICommandExecutor>();
                 commandExecutors.AddRange((selectable as Component).GetComponentsInParent<ICommandExecutor>());

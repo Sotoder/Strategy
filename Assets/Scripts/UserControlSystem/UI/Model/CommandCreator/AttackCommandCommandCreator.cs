@@ -26,7 +26,7 @@ namespace UserControlSystem
             _creationCallback = null;
         }
 
-        private void ONNewEnemy(ISelectableEnemy enemy)
+        private void ONNewEnemy(IAttackable enemy)
         {
             _creationCallback?.Invoke(_context.Inject(new AttackCommand(enemy)));
             _creationCallback = null;

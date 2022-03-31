@@ -1953,6 +1953,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1748817644}
     m_Modifications:
+    - target: {fileID: 1652693845619904236, guid: e337a09331ff83746b291b8894d8a1a2, type: 3}
+      propertyPath: _isEnemy
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6716558233620947219, guid: e337a09331ff83746b291b8894d8a1a2, type: 3}
       propertyPath: m_Name
       value: Gunner

@@ -17,36 +17,41 @@ public class OutlineSelectorPresenter : MonoBehaviour
 
     private void OnSelected(ISelectable selectable)
     {
+        var color = Color.green;
+
         if (_currentSelectable == selectable)
         {
             return;
         }
         
 
-        SetSelected(_outlineSelectors, false);
+        SetSelected(_outlineSelectors, false, color);
         _outlineSelectors = null;
 
         if (selectable != null)
         {
+            if (selectable.IsEnemy) color = Color.red;
+
             _outlineSelectors = (selectable as Component).GetComponentsInParent<OutlineSelector>();
-            SetSelected(_outlineSelectors, true);
+            SetSelected(_outlineSelectors, true, color);
         }
         else
         {
             if (_outlineSelectors != null)
             {
-                SetSelected(_outlineSelectors, false);
+                SetSelected(_outlineSelectors, false, color);
             }
         }
         
         _currentSelectable = selectable;
         
-        static void SetSelected(OutlineSelector[] selectors, bool value)
+        static void SetSelected(OutlineSelector[] selectors, bool value, Color color)
         {
             if (selectors != null)
             {
                 for (int i = 0; i < selectors.Length; i++)
                 {
+                    selectors[i].SetColor(color);
                     selectors[i].SetSelected(value);
                 }
             }

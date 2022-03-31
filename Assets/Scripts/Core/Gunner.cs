@@ -1,7 +1,7 @@
 using Abstractions;
 using UnityEngine;
 
-public class Chomper : BaseUnit, IAttackable
+public class Gunner : BaseUnit, IAttackable
 {
     public float Health => _health;
     public bool IsEnemy => _isEnemy;
