@@ -1,7 +1,7 @@
 using Abstractions;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour, ISelectableEnemy
+public class Enemy : MonoBehaviour, IAttackable
 {
     public float Health => _health;
     public float MaxHealth => _maxHealth;

@@ -1,23 +1,17 @@
-using Abstractions.Commands.CommandsInterfaces;
-using System.Collections.Generic;
+﻿using Abstractions.Commands.CommandsInterfaces;
 using UnityEngine;
 
 namespace UserControlSystem.CommandsRealization
 {
     public sealed class PatrolCommand : IPatrolCommand
     {
-        public List<Vector3> PatrolPoints { get; }
+        public Vector3 From { get; }
+        public Vector3 To { get; }
 
-        public PatrolCommand(Vector3 target)
+        public PatrolCommand(Vector3 @from, Vector3 to)
         {
-            PatrolPoints = new List<Vector3>();
-
-            PatrolPoints.Add(target);
-        }
-
-        public void SetStartPosition(Vector3 startPosition)
-        {
-            PatrolPoints.Add(startPosition);
+            From = @from;
+            To = to;
         }
     }
 }

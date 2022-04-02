@@ -1,22 +1,8 @@
-using Abstractions;
-using Abstractions.Commands.CommandsInterfaces;
-using UnityEngine;
+﻿using Abstractions.Commands.CommandsInterfaces;
 
-namespace UserControlSystem.CommandsRealization
+public sealed class AttackCommand : IAttackCommand
 {
-    public class AttackCommand : IAttackCommand
-    {
-        public Vector3 Target { get; }
-        public ISelectableEnemy Enemy { get; }
+    public IAttackable Target { get; }
 
-        public AttackCommand(Vector3 target)
-        {
-            Target = target;
-        }
-
-        public AttackCommand(ISelectableEnemy enemy)
-        {
-            Enemy = enemy;
-        }
-    }
+    public AttackCommand(IAttackable target) => Target = target;
 }
