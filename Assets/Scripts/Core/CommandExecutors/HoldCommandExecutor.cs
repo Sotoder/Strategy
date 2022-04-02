@@ -1,11 +1,12 @@
 using Abstractions.Commands;
 using Abstractions.Commands.CommandsInterfaces;
-using UnityEngine;
+using System.Threading;
 
 public class HoldCommandExecutor : CommandExecutorBase<IStopCommand>
 {
+    public CancellationTokenSource Cts { get; set; }
     public override void ExecuteSpecificCommand(IStopCommand command)
     {
-        Debug.Log("Unit stop");
+        Cts?.Cancel();
     }
 }

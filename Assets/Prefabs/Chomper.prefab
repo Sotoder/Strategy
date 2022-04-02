@@ -507,6 +507,7 @@ MonoBehaviour:
   _animator: {fileID: 6287441856393560922}
   _navAgent: {fileID: 1291557151352485220}
   _obstacle: {fileID: -8507251896187477169}
+  _holdCommandExecutor: {fileID: 312286327772972863}
 --- !u!114 &4909382071575614893
 MonoBehaviour:
   m_ObjectHideFlags: 0
