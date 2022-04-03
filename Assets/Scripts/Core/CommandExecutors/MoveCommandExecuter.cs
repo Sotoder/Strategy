@@ -5,14 +5,16 @@ using System.Threading;
 using UnityEngine;
 using UnityEngine.AI;
 using Utils;
+using Zenject;
 
 public class MoveCommandExecuter : CommandExecutorBase<IMoveCommand>
 {
     [SerializeField] private UnitMovementStop _stop;
     [SerializeField] private Animator _animator;
-    [SerializeField] private NavMeshAgent _navAgent;
-    [SerializeField] private NavMeshObstacle _obstacle;
-    [SerializeField] private HoldCommandExecutor _holdCommandExecutor;
+
+    [Inject] private NavMeshAgent _navAgent;
+    [Inject] private NavMeshObstacle _obstacle;
+    [Inject] private HoldCommandExecutor _holdCommandExecutor;
 
     private static readonly int Walk = Animator.StringToHash("Walk");
     private static readonly int Idle = Animator.StringToHash("Idle");

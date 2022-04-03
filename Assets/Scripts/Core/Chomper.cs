@@ -2,7 +2,9 @@ using Abstractions;
 using Abstractions.Commands;
 using Abstractions.Commands.CommandsInterfaces;
 using UnityEngine;
+using UnityEngine.AI;
 using Utils;
+using Zenject;
 
 public class Chomper : MonoBehaviour, ISelectable
 {
@@ -17,11 +19,16 @@ public class Chomper : MonoBehaviour, ISelectable
     [SerializeField] private Sprite _icon;
     [SerializeField] private Transform _pivotPoint;
 
+    [Inject] private NavMeshAgent _navAgent;
+    [Inject] private NavMeshObstacle _obstacle;
+
     private float _health = 100;
     private Outline _outline;
 
     private void Start()
     {
         _outline = gameObject.GetComponent<Outline>();
+        _navAgent.enabled = false;
+        _obstacle.enabled = true;
     }
 }

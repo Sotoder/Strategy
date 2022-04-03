@@ -949,6 +949,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1748817644}
     m_Modifications:
+    - target: {fileID: -8507251896187477169, guid: 9a14e11fe7e23784fb5e913d6bb456ee, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1291557151352485220, guid: 9a14e11fe7e23784fb5e913d6bb456ee, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6287441856403058840, guid: 9a14e11fe7e23784fb5e913d6bb456ee, type: 3}
       propertyPath: m_Name
       value: Chomper

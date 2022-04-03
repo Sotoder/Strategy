@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 using Utils;
+using Zenject;
 
 namespace Core
 {
@@ -9,8 +10,8 @@ namespace Core
     {
         public event Action OnStop;
 
-        [SerializeField] private NavMeshAgent _agent;
-        [SerializeField] private NavMeshObstacle _obstacle;
+        [Inject] private NavMeshAgent _agent;
+        [Inject] private NavMeshObstacle _obstacle;
 
         private void Update()
         {
