@@ -608,6 +608,7 @@ MonoBehaviour:
   _holdExecutor: {fileID: 312286327772972863}
   _agent: {fileID: 1291557151352485220}
   _obstacle: {fileID: -8507251896187477169}
+  _chomper: {fileID: -7720783232501576027}
 --- !u!114 &5740712858584583570
 MonoBehaviour:
   m_ObjectHideFlags: 0

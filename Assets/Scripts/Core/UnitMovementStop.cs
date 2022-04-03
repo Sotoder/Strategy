@@ -13,8 +13,12 @@ namespace Core
         [Inject] private NavMeshAgent _agent;
         [Inject] private NavMeshObstacle _obstacle;
 
+        private bool _isInit;
+
         private void Update()
         {
+            if (!_isInit) return;
+
             if (!_agent.pathPending && _agent.isActiveAndEnabled)
             {
                 if (_agent.remainingDistance <= _agent.stoppingDistance)
