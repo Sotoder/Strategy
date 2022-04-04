@@ -1,8 +1,13 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Abstractions;
+using Abstractions.Commands;
+using Abstractions.Commands.CommandsInterfaces;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UserControlSystem;
+using Utils;
+using Zenject;
 
 public sealed class MouseInteractionPresenter : MonoBehaviour
 {
@@ -13,10 +18,18 @@ public sealed class MouseInteractionPresenter : MonoBehaviour
     [SerializeField] private Vector3Value _groundClicksRMB;
     [SerializeField] private AttackableValue _attackablesRMB;
     [SerializeField] private Transform _groundTransform;
-    
+
+    //[Inject] private CommandCreatorBase<IMoveCommand> _mover;
+    //[Inject] private AssetsContext _context;
+    //private CommandExecutorBase<IMoveCommand> _moveExecutor;
+
     private Plane _groundPlane;
-    
-    private void Start() => _groundPlane = new Plane(_groundTransform.up, 0);
+
+    private void Start()
+    {
+        _groundPlane = new Plane(_groundTransform.up, 0);
+        //_groundClicksRMB.OnNewValue += ExecuteMove;
+    }
 
     private void Update()
     {
@@ -68,4 +81,21 @@ public sealed class MouseInteractionPresenter : MonoBehaviour
             .FirstOrDefault(c => c != null);
         return result != default;
     }
+
+    //private void ExecuteMove(Vector3 obj)
+    //{
+    //    if (_selectedObject.CurrentValue != null)
+    //    {
+    //        var commandExecutors = new List<ICommandExecutor>();
+    //        commandExecutors.AddRange((_selectedObject.CurrentValue as Component).GetComponentsInParent<ICommandExecutor>());
+
+    //        foreach (var executor in commandExecutors)
+    //        {
+    //            if (typeof(CommandExecutorBase<IMoveCommand>).IsAssignableFrom(executor.GetType()))
+    //            {
+    //                _mover.ProcessCommandExecutor(executor, command => executor.ExecuteCommand(command));
+    //            }
+    //        }
+    //    }
+    //}
 }
