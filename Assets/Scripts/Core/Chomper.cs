@@ -15,9 +15,8 @@ public class Chomper : MonoBehaviour, ISelectable
     [SerializeField] private float _maxHealth = 100;
     [SerializeField] private Sprite _icon;
     [SerializeField] private Transform _pivotPoint;
-
-    [Inject] private NavMeshAgent _navAgent;
-    [Inject] private NavMeshObstacle _obstacle;
+    [SerializeField] private NavMeshAgent _navAgent;
+    [SerializeField] private NavMeshObstacle _obstacle;
 
     private float _health = 100;
     private Outline _outline;

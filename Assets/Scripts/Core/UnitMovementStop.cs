@@ -10,8 +10,8 @@ namespace Core
     {
         public event Action OnStop;
 
-        [Inject] private NavMeshAgent _agent;
-        [Inject] private NavMeshObstacle _obstacle;
+        [SerializeField] private NavMeshAgent _agent;
+        [SerializeField] private NavMeshObstacle _obstacle;
 
         private bool _isInit;
 
