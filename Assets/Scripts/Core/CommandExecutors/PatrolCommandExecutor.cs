@@ -6,11 +6,6 @@ public class PatrolCommandExecutor : CommandExecutorBase<IPatrolCommand>
 {
     public override void ExecuteSpecificCommand(IPatrolCommand command)
     {
-        command.SetStartPosition(gameObject.transform.position);
-
-        for(int i = 1; i <= command.PatrolPoints.Count; i++)
-        {
-            Debug.Log($"Patrol point {i} = {command.PatrolPoints[i-1]}");
-        }
+        Debug.Log($"Patrol from {command.From} to {command.To}");
     }
 }

@@ -1,11 +1,10 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Abstractions.Commands.CommandsInterfaces
 {
     public interface IPatrolCommand : ICommand
     {
-        List<Vector3> PatrolPoints { get; }
-        void SetStartPosition(Vector3 startPosition);
+        public Vector3 From { get; }
+        public Vector3 To { get; }
     }
 }

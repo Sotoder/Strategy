@@ -1,8 +1,9 @@
-using Abstractions.Commands.CommandsInterfaces;
+﻿using Abstractions.Commands.CommandsInterfaces;
+using System.Threading;
 
 namespace UserControlSystem.CommandsRealization
 {
-    public class StopCommand : IStopCommand
+    public sealed class StopCommand : IStopCommand
     {
 
     }
