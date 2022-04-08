@@ -1,20 +1,21 @@
+using System;
+using UniRx;
 using Utils;
 
 namespace Core
 {
     public class StopAwaiter : BaseAwaiter<AsyncExtensions.Void>
     {
-        private readonly UnitMovementStop _unitMovementStop;
+        private readonly IDisposable _unitMovementStopSubscription;
 
         public StopAwaiter(UnitMovementStop unitMovementStop)
         {
-            _unitMovementStop = unitMovementStop;
-            _unitMovementStop.OnStop += ONStop;
+            _unitMovementStopSubscription = unitMovementStop.Subscribe(ONStop);
         }
 
-        private void ONStop()
+        private void ONStop(AsyncExtensions.Void v)
         {
-            _unitMovementStop.OnStop -= ONStop;
+            _unitMovementStopSubscription.Dispose();
             _isCompleted = true;
             _continuation?.Invoke();
         }
