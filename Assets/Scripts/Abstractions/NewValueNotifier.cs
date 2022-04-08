@@ -6,12 +6,7 @@ namespace UserControlSystem
 {
     public class NewValueNotifier<TAwaited> : BaseAwaiter<TAwaited>
     {
-        private readonly IDisposable _statefulSubscribtion;
-        private readonly IDisposable _statelessSubscribtion;
-
-        private readonly bool _isStateless;
         private TAwaited _result;
-
         public NewValueNotifier(StatelessScriptableObjectValueBase<TAwaited> scriptableObjectValueBase)
         {
             _statelessSubscribtion = scriptableObjectValueBase.Subscribe(ONNewValue);
@@ -23,13 +18,10 @@ namespace UserControlSystem
             _statefulSubscribtion = scriptableObjectValueBase.Subscribe(ONNewValue);
         }
 
-        private void ONNewValue(TAwaited obj)
+        protected override void ONNewValue(TAwaited obj)
         {
-            if (_isStateless) _statelessSubscribtion.Dispose();
-            else _statefulSubscribtion.Dispose();
             _result = obj;
-            _isCompleted = true;
-            _continuation?.Invoke();
+            base.ONNewValue(obj);
         }
         public override TAwaited GetResult() => _result;
     }
