@@ -1,7 +1,7 @@
 ﻿
-namespace UserControlSystem
+namespace Utils
 {
-    public class NewValueNotifier<TAwaited> : BaseAwaiter<TAwaited>
+    public class NewValueNotifier<TAwaited> : AwaiterBase<TAwaited>
     {
         private readonly ScriptableObjectValueBase<TAwaited> _scriptableObjectValueBase;
         private TAwaited _result;

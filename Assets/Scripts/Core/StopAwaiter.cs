@@ -2,7 +2,7 @@ using Utils;
 
 namespace Core
 {
-    public class StopAwaiter : BaseAwaiter<AsyncExtensions.Void>
+    public class StopAwaiter : AwaiterBase<AsyncExtensions.Void>
     {
         private readonly UnitMovementStop _unitMovementStop;
 

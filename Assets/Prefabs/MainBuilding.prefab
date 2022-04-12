@@ -175,7 +175,7 @@ GameObject:
   - component: {fileID: 6267617246793001072}
   - component: {fileID: 1789433167}
   - component: {fileID: -1049929542943699085}
-  - component: {fileID: 3723548393113684202}
+  - component: {fileID: 2026644624065116911}
   m_Layer: 0
   m_Name: MainBuilding
   m_TagString: Untagged
@@ -240,7 +240,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14e01563d37a23f4e9bae517fb3e14dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _unitsParent: {fileID: 0}
   _maxHealth: 1000
   _icon: {fileID: 21300000, guid: 712262adeebd1924cad36360993fca8a, type: 3}
   _pivotPoint: {fileID: 6267617247431913109}
@@ -276,7 +275,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _outlineComponents:
   - {fileID: 1789433167}
---- !u!114 &3723548393113684202
+--- !u!114 &2026644624065116911
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -285,10 +284,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 6267617247432143541}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5cbae7c02b4791747ba7d6221715a212, type: 3}
+  m_Script: {fileID: 11500000, guid: 6d55cb6fbd3f4ed88b81600129ae9071, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _unitsParent: {fileID: 0}
+  _maximumUnitsInQueue: 6
 --- !u!1 &6267617247432143543
 GameObject:
   m_ObjectHideFlags: 0

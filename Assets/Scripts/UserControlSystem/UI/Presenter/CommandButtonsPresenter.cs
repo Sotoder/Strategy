@@ -14,8 +14,8 @@ namespace UserControlSystem.UI.Presenter
 {
     public sealed class CommandButtonsPresenter : MonoBehaviour
     {
-        [SerializeField] private SelectableValue _selectable;
         [SerializeField] private CommandButtonsView _view;
+        [Inject] private IObservable<ISelectable> _selectedValues;
         [Inject] private CommandButtonsModel _model;
         private ISelectable _currentSelectable;
         
@@ -26,7 +26,7 @@ namespace UserControlSystem.UI.Presenter
             _model.OnCommandCancel += _view.UnblockAllInteractions;
             _model.OnCommandAccepted += _view.BlockInteractions;
 
-            _selectable.Subscribe(ONSelected);
+            _selectedValues.Subscribe(ONSelected);
         }
 
         private void ONSelected(ISelectable selectable)
