@@ -1,23 +1,27 @@
 ﻿
+using System;
+using UniRx;
+
 namespace UserControlSystem
 {
     public class NewValueNotifier<TAwaited> : BaseAwaiter<TAwaited>
     {
-        private readonly ScriptableObjectValueBase<TAwaited> _scriptableObjectValueBase;
         private TAwaited _result;
-
-        public NewValueNotifier(ScriptableObjectValueBase<TAwaited> scriptableObjectValueBase)
+        public NewValueNotifier(StatelessScriptableObjectValueBase<TAwaited> scriptableObjectValueBase)
         {
-            _scriptableObjectValueBase = scriptableObjectValueBase;
-            _scriptableObjectValueBase.OnNewValue += ONNewValue;
+            _statelessSubscribtion = scriptableObjectValueBase.Subscribe(ONNewValue);
+            _isStateless = true;
         }
 
-        private void ONNewValue(TAwaited obj)
+        public NewValueNotifier(StatefulScriptableObjectValueBase<TAwaited> scriptableObjectValueBase)
         {
-            _scriptableObjectValueBase.OnNewValue -= ONNewValue;
+            _statefulSubscribtion = scriptableObjectValueBase.Subscribe(ONNewValue);
+        }
+
+        protected override void ONNewValue(TAwaited obj)
+        {
             _result = obj;
-            _isCompleted = true;
-            _continuation?.Invoke();
+            base.ONNewValue(obj);
         }
         public override TAwaited GetResult() => _result;
     }

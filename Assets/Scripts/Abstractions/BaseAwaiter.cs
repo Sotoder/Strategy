@@ -3,6 +3,11 @@ using Utils;
 
 public abstract class BaseAwaiter<T> : IAwaiter<T>
 {
+    protected IDisposable _statefulSubscribtion;
+    protected IDisposable _statelessSubscribtion;
+
+    protected bool _isStateless;
+
     protected bool _isCompleted;
     protected Action _continuation;
 
@@ -20,5 +25,13 @@ public abstract class BaseAwaiter<T> : IAwaiter<T>
         {
             _continuation = continuation;
         }
+    }
+
+    protected virtual void ONNewValue(T arg)
+    {
+        if (_isStateless) _statelessSubscribtion.Dispose();
+        else _statefulSubscribtion.Dispose();
+        _isCompleted = true;
+        _continuation?.Invoke();
     }
 }

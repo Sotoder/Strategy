@@ -1,4 +1,5 @@
 ﻿using System;
+using UniRx;
 using UnityEngine;
 using UnityEngine.AI;
 using Utils;
@@ -6,9 +7,9 @@ using Zenject;
 
 namespace Core
 {
-    public class UnitMovementStop : MonoBehaviour, IAwaitable<AsyncExtensions.Void>
+    public class UnitMovementStop : MonoBehaviour, IAwaitable<AsyncExtensions.Void>, IObservable<AsyncExtensions.Void>
     {
-        public event Action OnStop;
+        private Subject<AsyncExtensions.Void> _onStop = new Subject<AsyncExtensions.Void>();
 
         [SerializeField] private NavMeshAgent _agent;
         [SerializeField] private NavMeshObstacle _obstacle;
@@ -21,7 +22,7 @@ namespace Core
                 {
                     if (!_agent.hasPath || _agent.velocity.sqrMagnitude == 0f)
                     {
-                        OnStop?.Invoke();
+                        _onStop?.OnNext(new AsyncExtensions.Void());
                         _agent.enabled = false;
                         _obstacle.enabled = true;
                     }
@@ -30,5 +31,6 @@ namespace Core
         }
 
         public IAwaiter<AsyncExtensions.Void> GetAwaiter() => new StopAwaiter(this);
+        public IDisposable Subscribe(IObserver<AsyncExtensions.Void> observer) => _onStop.Subscribe(observer);
     }
 }

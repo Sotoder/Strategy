@@ -3,7 +3,7 @@ using UnityEngine;
 using UserControlSystem;
 using Utils;
 
-public abstract class ScriptableObjectValueBase<T> : ScriptableObject, IAwaitable<T>
+public abstract class ScriptableObjectValueBase<T> : ScriptableObject
 {
     public T CurrentValue { get; private set; }
     public Action<T> OnNewValue;
@@ -12,9 +12,4 @@ public abstract class ScriptableObjectValueBase<T> : ScriptableObject, IAwaitabl
         CurrentValue = value;
         OnNewValue?.Invoke(value);
     }
-    public IAwaiter<T> GetAwaiter()
-    {
-        return new NewValueNotifier<T>(this);
-    }
-
 }
