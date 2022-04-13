@@ -23,8 +23,8 @@ public sealed class MouseInteractionPresenter : MonoBehaviour
     [Inject]
     public void Init()
     {
-        var LMBClick = Observable.EveryUpdate().Where(click => Input.GetMouseButtonDown(0));
-        var RMBClick = Observable.EveryUpdate().Where(click => Input.GetMouseButtonDown(1));
+        var LMBClick = Observable.EveryUpdate().Where(click => !_eventSystem.IsPointerOverGameObject() && Input.GetMouseButtonDown(0));
+        var RMBClick = Observable.EveryUpdate().Where(click => !_eventSystem.IsPointerOverGameObject() && Input.GetMouseButtonDown(1));
 
         var LMBHits = LMBClick.Select(rays => _camera.ScreenPointToRay(Input.mousePosition)).Select(ray => Physics.RaycastAll(ray));
         var RMBHits = RMBClick.Select(rays => _camera.ScreenPointToRay(Input.mousePosition));
@@ -34,6 +34,9 @@ public sealed class MouseInteractionPresenter : MonoBehaviour
             if (WeHit<ISelectable>(hits, out var selectable))
             {
                 _selectedObject.SetValue(selectable);
+            } else
+            {
+                _selectedObject.SetValue(null);
             }
         });
 
