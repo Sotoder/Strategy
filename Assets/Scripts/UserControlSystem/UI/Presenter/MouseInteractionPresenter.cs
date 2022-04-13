@@ -1,8 +1,10 @@
 ﻿using System.Linq;
 using Abstractions;
+using UniRx;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UserControlSystem;
+using Zenject;
 
 public sealed class MouseInteractionPresenter : MonoBehaviour
 {
@@ -18,33 +20,29 @@ public sealed class MouseInteractionPresenter : MonoBehaviour
     
     private void Start() => _groundPlane = new Plane(_groundTransform.up, 0);
 
-    private void Update()
+    [Inject]
+    public void Init()
     {
-        if (!Input.GetMouseButtonUp(0) && !Input.GetMouseButton(1))
-        {
-            return;
-        }
-        
-        if (_eventSystem.IsPointerOverGameObject())
-        {
-            return;
-        }
-        
-        var ray = _camera.ScreenPointToRay(Input.mousePosition);
-        var hits = Physics.RaycastAll(ray);
-        if (Input.GetMouseButtonUp(0))
+        var LMBClick = Observable.EveryUpdate().Where(click => !_eventSystem.IsPointerOverGameObject() && Input.GetMouseButtonDown(0));
+        var RMBClick = Observable.EveryUpdate().Where(click => !_eventSystem.IsPointerOverGameObject() && Input.GetMouseButtonDown(1));
+
+        var LMBHits = LMBClick.Select(rays => _camera.ScreenPointToRay(Input.mousePosition)).Select(ray => Physics.RaycastAll(ray));
+        var RMBHits = RMBClick.Select(rays => _camera.ScreenPointToRay(Input.mousePosition));
+
+        LMBHits.Subscribe(hits =>
         {
             if (WeHit<ISelectable>(hits, out var selectable))
             {
                 _selectedObject.SetValue(selectable);
-            }
-            else
+            } else
             {
                 _selectedObject.SetValue(null);
             }
-        }
-        else
+        });
+
+        RMBHits.Subscribe(ray =>
         {
+            var hits = Physics.RaycastAll(ray);
             if (WeHit<IAttackable>(hits, out var attackable))
             {
                 _attackablesRMB.SetValue(attackable);
@@ -53,7 +51,8 @@ public sealed class MouseInteractionPresenter : MonoBehaviour
             {
                 _groundClicksRMB.SetValue(ray.origin + ray.direction * enter);
             }
-        }
+        });
+
     }
 
     private bool WeHit<T>(RaycastHit[] hits, out T result) where T : class
