@@ -33,6 +33,7 @@ namespace UserControlSystem.UI.View
                 .Add(typeof(CommandExecutorBase<IStopCommand>), _stopButton);
             _buttonsByExecutorType
                 .Add(typeof(CommandExecutorBase<IProduceUnitCommand>), _produceUnitButton);
+            Clear();
         }
         public void BlockInteractions(ICommandExecutor ce)
         {
