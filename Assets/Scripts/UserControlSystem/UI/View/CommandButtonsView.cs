@@ -17,6 +17,8 @@ namespace UserControlSystem.UI.View
         [SerializeField] private GameObject _patrolButton;
         [SerializeField] private GameObject _stopButton;
         [SerializeField] private GameObject _produceUnitButton;
+        [SerializeField] private GameObject _setDistanationButton;
+        [SerializeField] private GameObject _resetDistanationButton;
 
         private Dictionary<Type, GameObject> _buttonsByExecutorType;
 
@@ -33,6 +35,10 @@ namespace UserControlSystem.UI.View
                 .Add(typeof(CommandExecutorBase<IStopCommand>), _stopButton);
             _buttonsByExecutorType
                 .Add(typeof(CommandExecutorBase<IProduceUnitCommand>), _produceUnitButton);
+            _buttonsByExecutorType
+                .Add(typeof(CommandExecutorBase<ISetDistanationCommand>), _setDistanationButton);
+            _buttonsByExecutorType
+                .Add(typeof(CommandExecutorBase<IResetRallyPointCommand>), _resetDistanationButton);
             Clear();
         }
         public void BlockInteractions(ICommandExecutor ce)
@@ -51,6 +57,8 @@ namespace UserControlSystem.UI.View
             _patrolButton.GetComponent<Selectable>().interactable = value;
             _stopButton.GetComponent<Selectable>().interactable = value;
             _produceUnitButton.GetComponent<Selectable>().interactable = value;
+            _setDistanationButton.GetComponent<Selectable>().interactable = value;
+            _resetDistanationButton.GetComponent<Selectable>().interactable = value;
         }
 
         public void MakeLayout(IEnumerable<ICommandExecutor> commandExecutors)

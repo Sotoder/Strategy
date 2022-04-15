@@ -16,6 +16,8 @@ namespace UserControlSystem
         [Inject] private CommandCreatorBase<IStopCommand> _stopper;
         [Inject] private CommandCreatorBase<IMoveCommand> _mover;
         [Inject] private CommandCreatorBase<IPatrolCommand> _patroller;
+        [Inject] private CommandCreatorBase<ISetDistanationCommand> _distanationSetter;
+        [Inject] private CommandCreatorBase<IResetRallyPointCommand> _distanationResetter;
 
         private bool _commandIsPending;
 
@@ -33,6 +35,8 @@ namespace UserControlSystem
             _stopper.ProcessCommandExecutor(commandExecutor, command => ExecuteCommandWrapper(commandExecutor, command));
             _mover.ProcessCommandExecutor(commandExecutor, command => ExecuteCommandWrapper(commandExecutor, command));
             _patroller.ProcessCommandExecutor(commandExecutor, command => ExecuteCommandWrapper(commandExecutor, command));
+            _distanationSetter.ProcessCommandExecutor(commandExecutor, command => ExecuteCommandWrapper(commandExecutor, command));
+            _distanationResetter.ProcessCommandExecutor(commandExecutor, command => ExecuteCommandWrapper(commandExecutor, command));
         }
 
         public void ExecuteCommandWrapper(ICommandExecutor commandExecutor, object command)
@@ -55,6 +59,8 @@ namespace UserControlSystem
             _stopper.ProcessCancel();
             _mover.ProcessCancel();
             _patroller.ProcessCancel();
+            _distanationSetter.ProcessCancel();
+            _distanationResetter.ProcessCancel();
 
             OnCommandCancel?.Invoke();
         }
