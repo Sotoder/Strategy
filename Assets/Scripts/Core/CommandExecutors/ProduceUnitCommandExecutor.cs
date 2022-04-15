@@ -15,6 +15,7 @@ namespace Core.CommandExecutors
         [SerializeField] private int _maximumUnitsInQueue = 6;
 
         [Inject] private MainBuilding _mainBuilding;
+        [Inject] private DiContainer _diContainer;
 
         private ReactiveCollection<IUnitProductionTask> _queue = new ReactiveCollection<IUnitProductionTask>();
 
@@ -30,7 +31,7 @@ namespace Core.CommandExecutors
             if (innerTask.TimeLeft <= 0)
             {
                 removeTaskAtIndex(0);
-                var newUnit = Instantiate(innerTask.UnitPrefab, new Vector3(this.transform.position.x - 3, 0, this.transform.position.z), Quaternion.identity, _unitsParent);
+                var newUnit = _diContainer.InstantiatePrefab(innerTask.UnitPrefab, new Vector3(this.transform.position.x - 3, 0, this.transform.position.z), Quaternion.identity, _unitsParent);
                
                 newUnit.GetComponent<MoveCommandExecuter>().ExecuteSpecificCommand(new MoveCommand(_mainBuilding.UnitRallyPoint));
             }
@@ -49,7 +50,10 @@ namespace Core.CommandExecutors
 
         public override void ExecuteSpecificCommand(IProduceUnitCommand command)
         {
-            _queue.Add(new UnitProductionTask(command.ProductionTime, command.Icon, command.UnitPrefab, command.UnitName));
+            if (_queue.Count < _maximumUnitsInQueue)
+            {
+                _queue.Add(new UnitProductionTask(command.ProductionTime, command.Icon, command.UnitPrefab, command.UnitName));
+            }
         }
     }
 }
