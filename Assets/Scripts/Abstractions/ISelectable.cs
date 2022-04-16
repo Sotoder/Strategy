@@ -1,14 +1,9 @@
 ﻿using UnityEngine;
-using Tools;
-
 
 namespace Abstractions
 {
-    public interface ISelectable
+    public interface ISelectable : IHealthHolder, IIconHolder
     {
-        float Health { get; }
-        float MaxHealth { get; }
-        Sprite Icon { get; }
-        Outline ObjectOutline { get; }
+        Transform PivotPoint { get; }
     }
 }
