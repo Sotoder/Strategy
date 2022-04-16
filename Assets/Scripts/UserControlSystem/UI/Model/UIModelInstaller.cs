@@ -22,6 +22,10 @@ namespace UserControlSystem
                 .To<PatrolCommandCommandCreator>().AsTransient();
             Container.Bind<CommandCreatorBase<IStopCommand>>()
                 .To<StopCommandCommandCreator>().AsTransient();
+            Container.Bind<CommandCreatorBase<ISetDistanationCommand>>()
+                .To<SetDistanationCommandCommandCreator>().AsTransient();
+            Container.Bind<CommandCreatorBase<IResetRallyPointCommand>>()
+                .To<ResetRallyPontCommandCommandCreator>().AsTransient();
 
             Container.Bind<CommandButtonsModel>().AsTransient();
             

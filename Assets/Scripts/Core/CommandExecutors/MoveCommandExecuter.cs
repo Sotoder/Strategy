@@ -2,6 +2,7 @@
 using Abstractions.Commands.CommandsInterfaces;
 using Core;
 using System.Threading;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AI;
 using Utils;
@@ -18,7 +19,7 @@ public class MoveCommandExecuter : CommandExecutorBase<IMoveCommand>
     private static readonly int Walk = Animator.StringToHash("Walk");
     private static readonly int Idle = Animator.StringToHash("Idle");
 
-    public override async void ExecuteSpecificCommand(IMoveCommand command)
+    public override async Task ExecuteSpecificCommand(IMoveCommand command)
     {
         _holdCommandExecutor.Cts = new CancellationTokenSource();
 

@@ -14,4 +14,20 @@ public sealed class MainBuilding : MonoBehaviour, ISelectable
 
     private float _health = 1000;
 
+    public Vector3 UnitRallyPoint;
+
+    private Vector3 _baseRallyPoint;  
+
+    private void Start()
+    {
+        _baseRallyPoint = new Vector3(this.transform.position.x - 3, 0, this.transform.position.z);
+        UnitRallyPoint = _baseRallyPoint;
+    }
+
+    public void ResetRallyPoint()
+    {
+        UnitRallyPoint = _baseRallyPoint;
+    }
+
+
 }

@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using Zenject;
 
-public class Chomper : MonoBehaviour, ISelectable
+public class Chomper : MonoBehaviour, ISelectable, IUnit
 {
     public float Health => _health;
     public float MaxHealth => _maxHealth;
@@ -24,7 +24,5 @@ public class Chomper : MonoBehaviour, ISelectable
     private void Start()
     {
         _outline = gameObject.GetComponent<Outline>();
-        _navAgent.enabled = false;
-        _obstacle.enabled = true;
     }
 }
