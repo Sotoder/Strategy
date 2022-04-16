@@ -1000,65 +1000,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e337a09331ff83746b291b8894d8a1a2, type: 3}
---- !u!1 &1394752145 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6267617247432143541, guid: a84953a7ca0738a4eab2dd7252b2bb0d, type: 3}
-  m_PrefabInstance: {fileID: 1456806377}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1394752146
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1394752145}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 91d52c4aaf4452746b560c2223c42135, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _mainBuilding: {fileID: 1394752149}
---- !u!114 &1394752147
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1394752145}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08eca9f7688a0a24685b89133b020c8e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _scriptableObjectInstallers: []
-  _monoInstallers:
-  - {fileID: 1394752146}
-  _installerPrefabs: []
-  _autoRun: 1
-  _kernel: {fileID: 0}
---- !u!114 &1394752149 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6267617246793001072, guid: a84953a7ca0738a4eab2dd7252b2bb0d, type: 3}
-  m_PrefabInstance: {fileID: 1456806377}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1394752145}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14e01563d37a23f4e9bae517fb3e14dd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1394752151
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1394752145}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c09022a6bcd758441be40ad329cb82a8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1456806377
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1070,14 +1011,14 @@ PrefabInstance:
       propertyPath: _unitsParent
       value: 
       objectReference: {fileID: 1748817644}
-    - target: {fileID: 2026644624065116911, guid: a84953a7ca0738a4eab2dd7252b2bb0d, type: 3}
-      propertyPath: _maximumUnitsInQueue
-      value: 5
+    - target: {fileID: 5471824289156084133, guid: a84953a7ca0738a4eab2dd7252b2bb0d, type: 3}
+      propertyPath: _monoInstallers.Array.size
+      value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 3723548393113684202, guid: a84953a7ca0738a4eab2dd7252b2bb0d, type: 3}
-      propertyPath: _unitsParent
+    - target: {fileID: 5471824289156084133, guid: a84953a7ca0738a4eab2dd7252b2bb0d, type: 3}
+      propertyPath: _monoInstallers.Array.data[1]
       value: 
-      objectReference: {fileID: 1748817644}
+      objectReference: {fileID: 0}
     - target: {fileID: 6267617247431913109, guid: a84953a7ca0738a4eab2dd7252b2bb0d, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -1126,7 +1067,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: MainBuilding
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5471824289156084133, guid: a84953a7ca0738a4eab2dd7252b2bb0d, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a84953a7ca0738a4eab2dd7252b2bb0d, type: 3}
 --- !u!1001 &1522323736
 PrefabInstance:

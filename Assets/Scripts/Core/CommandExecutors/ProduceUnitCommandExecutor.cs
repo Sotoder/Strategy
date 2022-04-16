@@ -1,6 +1,7 @@
 ﻿using Abstractions;
 using Abstractions.Commands;
 using Abstractions.Commands.CommandsInterfaces;
+using System.Threading.Tasks;
 using UniRx;
 using UnityEngine;
 using Zenject;
@@ -33,7 +34,7 @@ namespace Core.CommandExecutors
                 removeTaskAtIndex(0);
                 var newUnit = _diContainer.InstantiatePrefab(innerTask.UnitPrefab, new Vector3(this.transform.position.x - 3, 0, this.transform.position.z), Quaternion.identity, _unitsParent);
                
-                newUnit.GetComponent<MoveCommandExecuter>().ExecuteSpecificCommand(new MoveCommand(_mainBuilding.UnitRallyPoint));
+                newUnit.GetComponent<MoveCommandExecuter>().ExecuteCommand(new MoveCommand(_mainBuilding.UnitRallyPoint));
             }
         }
 
@@ -48,12 +49,13 @@ namespace Core.CommandExecutors
             _queue.RemoveAt(_queue.Count - 1);
         }
 
-        public override void ExecuteSpecificCommand(IProduceUnitCommand command)
+        public override Task ExecuteSpecificCommand(IProduceUnitCommand command)
         {
             if (_queue.Count < _maximumUnitsInQueue)
             {
                 _queue.Add(new UnitProductionTask(command.ProductionTime, command.Icon, command.UnitPrefab, command.UnitName));
             }
+            return Task.CompletedTask;
         }
     }
 }

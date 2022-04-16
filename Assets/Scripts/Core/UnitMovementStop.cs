@@ -40,8 +40,6 @@ namespace Core
                             {
                                 _agent.ResetPath();
                                 OnStop?.Invoke();
-                                _agent.enabled = false;
-                                _obstacle.enabled = true;
                             })
                             .AddTo(this);
         }
@@ -55,8 +53,6 @@ namespace Core
                     if (!_agent.hasPath || _agent.velocity.sqrMagnitude == 0f)
                     {
                         OnStop?.Invoke();
-                        _agent.enabled = false;
-                        _obstacle.enabled = true;
                     }
                 }
             }

@@ -392,6 +392,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6287441856403090616}
   - component: {fileID: 6287441856393560922}
+  - component: {fileID: 2938426434196215438}
   - component: {fileID: -7720783232501576027}
   - component: {fileID: -6013785518103879737}
   - component: {fileID: 3596493062161579315}
@@ -402,6 +403,8 @@ GameObject:
   - component: {fileID: -4317165397797151367}
   - component: {fileID: 1291557151352485220}
   - component: {fileID: -8507251896187477169}
+  - component: {fileID: 1302349448664350331}
+  - component: {fileID: 8974044040099265042}
   m_Layer: 0
   m_Name: Chomper
   m_TagString: Untagged
@@ -444,6 +447,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &2938426434196215438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6287441856403058840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c792f583161e97d4bba96a30ccdac6cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &-7720783232501576027
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -601,6 +616,36 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0.5
+--- !u!114 &1302349448664350331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6287441856403058840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ec3e9b9483a2da498153299daecec21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8974044040099265042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6287441856403058840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08eca9f7688a0a24685b89133b020c8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scriptableObjectInstallers: []
+  _monoInstallers:
+  - {fileID: 2938426434196215438}
+  _installerPrefabs: []
+  _autoRun: 1
+  _kernel: {fileID: 0}
 --- !u!1 &6287441856403058842
 GameObject:
   m_ObjectHideFlags: 0
