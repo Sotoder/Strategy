@@ -1,10 +1,12 @@
-﻿using Abstractions;
+﻿using System.Threading.Tasks;
+using Abstractions;
 using Abstractions.Commands;
 using Abstractions.Commands.CommandsInterfaces;
-using System.Threading.Tasks;
+using Assets.Scripts.Core;
 using UniRx;
 using UnityEngine;
 using Zenject;
+using Random = UnityEngine.Random;
 
 namespace Core.CommandExecutors
 {
@@ -14,8 +16,6 @@ namespace Core.CommandExecutors
 
         [SerializeField] private Transform _unitsParent;
         [SerializeField] private int _maximumUnitsInQueue = 6;
-
-        [Inject] private MainBuilding _mainBuilding;
         [Inject] private DiContainer _diContainer;
 
         private ReactiveCollection<IUnitProductionTask> _queue = new ReactiveCollection<IUnitProductionTask>();
@@ -31,16 +31,14 @@ namespace Core.CommandExecutors
             innerTask.TimeLeft -= Time.deltaTime;
             if (innerTask.TimeLeft <= 0)
             {
-                removeTaskAtIndex(0);
-                var newUnit = _diContainer.InstantiatePrefab(innerTask.UnitPrefab, new Vector3(this.transform.position.x - 3, 0, this.transform.position.z), Quaternion.identity, _unitsParent);
-               
-                newUnit.GetComponent<MoveCommandExecuter>().ExecuteCommand(new MoveCommand(_mainBuilding.UnitRallyPoint));
+                RemoveTaskAtIndex(0);
+                Instantiate(innerTask.UnitPrefab, new Vector3(Random.Range(-10, 10), 0, Random.Range(-10, 10)), Quaternion.identity, _unitsParent);
             }
         }
 
-        public void Cancel(int index) => removeTaskAtIndex(index);
+        public void Cancel(int index) => RemoveTaskAtIndex(index);
 
-        private void removeTaskAtIndex(int index)
+        private void RemoveTaskAtIndex(int index)
         {
             for (int i = index; i < _queue.Count - 1; i++)
             {
@@ -49,13 +47,14 @@ namespace Core.CommandExecutors
             _queue.RemoveAt(_queue.Count - 1);
         }
 
-        public override Task ExecuteSpecificCommand(IProduceUnitCommand command)
+        public override async Task ExecuteSpecificCommand(IProduceUnitCommand command)
         {
-            if (_queue.Count < _maximumUnitsInQueue)
-            {
-                _queue.Add(new UnitProductionTask(command.ProductionTime, command.Icon, command.UnitPrefab, command.UnitName));
-            }
-            return Task.CompletedTask;
+            var instance = _diContainer.InstantiatePrefab(command.UnitPrefab, transform.position, Quaternion.identity, _unitsParent);
+            var queue = instance.GetComponent<ICommandsQueue>();
+            var mainBuilding = GetComponent<MainBuilding>();
+            var factionMember = instance.GetComponent<FactionMember>();
+            factionMember.SetFaction(GetComponent<FactionMember>().FactionId);
+            queue.EnqueueCommand(new MoveCommand(mainBuilding.UnitRallyPoint));
         }
     }
 }

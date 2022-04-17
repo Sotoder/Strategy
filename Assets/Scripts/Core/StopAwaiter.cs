@@ -1,4 +1,4 @@
-using Utils;
+﻿using Utils;
 
 namespace Core
 {
@@ -15,9 +15,7 @@ namespace Core
         private void ONStop()
         {
             _unitMovementStop.OnStop -= ONStop;
-            _isCompleted = true;
-            _continuation?.Invoke();
+            ONWaitFinish(new AsyncExtensions.Void());
         }
-        public override AsyncExtensions.Void GetResult() => new AsyncExtensions.Void();
     }
 }

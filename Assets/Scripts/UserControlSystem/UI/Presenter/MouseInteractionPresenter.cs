@@ -17,32 +17,40 @@ public sealed class MouseInteractionPresenter : MonoBehaviour
     [SerializeField] private Transform _groundTransform;
     
     private Plane _groundPlane;
-    
-    private void Start() => _groundPlane = new Plane(_groundTransform.up, 0);
 
     [Inject]
-    public void Init()
+    private void Init()
     {
-        var LMBClick = Observable.EveryUpdate().Where(click => !_eventSystem.IsPointerOverGameObject() && Input.GetMouseButtonDown(0));
-        var RMBClick = Observable.EveryUpdate().Where(click => !_eventSystem.IsPointerOverGameObject() && Input.GetMouseButtonDown(1));
+        _groundPlane = new Plane(_groundTransform.up, 0);
 
-        var LMBHits = LMBClick.Select(rays => _camera.ScreenPointToRay(Input.mousePosition)).Select(ray => Physics.RaycastAll(ray));
-        var RMBHits = RMBClick.Select(rays => _camera.ScreenPointToRay(Input.mousePosition));
+        var nonBlockedByUiFramesStream = Observable.EveryUpdate()
+            .Where(_ => !_eventSystem.IsPointerOverGameObject());
 
-        LMBHits.Subscribe(hits =>
+        var leftClicksStream = nonBlockedByUiFramesStream
+            .Where(_ => Input.GetMouseButtonDown(0));
+        var rightClicksStream = nonBlockedByUiFramesStream
+            .Where(_ => Input.GetMouseButtonDown(1));
+
+        var lmbRays = leftClicksStream
+            .Select(_ => _camera.ScreenPointToRay(Input.mousePosition));
+        var rmbRays = rightClicksStream
+            .Select(_ => _camera.ScreenPointToRay(Input.mousePosition));
+
+        var lmbHitsStream = lmbRays
+            .Select(ray => Physics.RaycastAll(ray));
+        var rmbHitsStream = rmbRays
+            .Select(ray => (ray, Physics.RaycastAll(ray)));
+
+        lmbHitsStream.Subscribe(hits =>
         {
             if (WeHit<ISelectable>(hits, out var selectable))
             {
                 _selectedObject.SetValue(selectable);
-            } else
-            {
-                _selectedObject.SetValue(null);
             }
         });
-
-        RMBHits.Subscribe(ray =>
+        
+        rmbHitsStream.Subscribe((ray, hits) =>
         {
-            var hits = Physics.RaycastAll(ray);
             if (WeHit<IAttackable>(hits, out var attackable))
             {
                 _attackablesRMB.SetValue(attackable);
@@ -52,9 +60,8 @@ public sealed class MouseInteractionPresenter : MonoBehaviour
                 _groundClicksRMB.SetValue(ray.origin + ray.direction * enter);
             }
         });
-
     }
-
+    
     private bool WeHit<T>(RaycastHit[] hits, out T result) where T : class
     {
         result = default;

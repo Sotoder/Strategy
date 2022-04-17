@@ -14,7 +14,6 @@ namespace UserControlSystem.UI.View
 
         [SerializeField] private Slider _productionProgressSlider;
         [SerializeField] private TextMeshProUGUI _currentUnitName;
-        [SerializeField] private Image _icon;
 
         [SerializeField] private Image[] _images;
         [SerializeField] private GameObject[] _imageHolders;
@@ -73,7 +72,6 @@ namespace UserControlSystem.UI.View
                     _productionProgressSlider.gameObject.SetActive(true);
                     _currentUnitName.text = task.UnitName;
                     _currentUnitName.enabled = true;
-                    _icon.sprite = task.Icon;
                     _unitProductionTaskCt = Observable.EveryUpdate()
                         .Subscribe(_ =>
                         {

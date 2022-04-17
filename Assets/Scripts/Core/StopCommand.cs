@@ -2,7 +2,7 @@
 
 namespace Core
 {
-    public sealed class StopCommand : IStopCommand
+    public class StopCommand : IStopCommand
     {
         
     }

@@ -16,7 +16,7 @@ public sealed class MainBuilding : MonoBehaviour, ISelectable
 
     public Vector3 UnitRallyPoint;
 
-    private Vector3 _baseRallyPoint;  
+    private Vector3 _baseRallyPoint;
 
     private void Start()
     {
@@ -28,6 +28,5 @@ public sealed class MainBuilding : MonoBehaviour, ISelectable
     {
         UnitRallyPoint = _baseRallyPoint;
     }
-
 
 }

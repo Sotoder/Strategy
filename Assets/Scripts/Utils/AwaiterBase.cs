@@ -1,16 +1,17 @@
-using System;
+﻿using System;
 
 namespace Utils
 {
-    public abstract class AwaiterBase<T> : IAwaiter<T>
+    public abstract class AwaiterBase<TAwaited> : IAwaiter<TAwaited>
     {
-        protected bool _isCompleted;
-        protected Action _continuation;
+        private Action _continuation;
+        private bool _isCompleted;
+        private TAwaited _result;
 
         public bool IsCompleted => _isCompleted;
 
-        public abstract T GetResult();
-
+        public TAwaited GetResult() => _result;
+        
         public void OnCompleted(Action continuation)
         {
             if (_isCompleted)
@@ -21,6 +22,13 @@ namespace Utils
             {
                 _continuation = continuation;
             }
+        }
+
+        protected void ONWaitFinish(TAwaited result)
+        {
+            _result = result;
+            _isCompleted = true;
+            _continuation?.Invoke();
         }
     }
 }

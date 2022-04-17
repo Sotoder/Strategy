@@ -1,10 +1,8 @@
-﻿
-namespace Utils
+﻿namespace Utils
 {
     public class NewValueNotifier<TAwaited> : AwaiterBase<TAwaited>
     {
         private readonly ScriptableObjectValueBase<TAwaited> _scriptableObjectValueBase;
-        private TAwaited _result;
 
         public NewValueNotifier(ScriptableObjectValueBase<TAwaited> scriptableObjectValueBase)
         {
@@ -15,10 +13,7 @@ namespace Utils
         private void ONNewValue(TAwaited obj)
         {
             _scriptableObjectValueBase.OnNewValue -= ONNewValue;
-            _result = obj;
-            _isCompleted = true;
-            _continuation?.Invoke();
+            ONWaitFinish(obj);
         }
-        public override TAwaited GetResult() => _result;
     }
 }

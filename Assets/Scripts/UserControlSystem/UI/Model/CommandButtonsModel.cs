@@ -1,4 +1,5 @@
 ﻿using System;
+using Abstractions;
 using Abstractions.Commands;
 using Abstractions.Commands.CommandsInterfaces;
 using UnityEngine;
@@ -17,13 +18,11 @@ namespace UserControlSystem
         [Inject] private CommandCreatorBase<IStopCommand> _stopper;
         [Inject] private CommandCreatorBase<IMoveCommand> _mover;
         [Inject] private CommandCreatorBase<IPatrolCommand> _patroller;
-        [Inject] private CommandCreatorBase<ISetDistanationCommand> _distanationSetter;
-        [Inject] private CommandCreatorBase<IResetRallyPointCommand> _distanationResetter;
+        [Inject] private CommandCreatorBase<ISetDistanationCommand> _setRally;
 
         private bool _commandIsPending;
 
-        public void OnCommandButtonClicked(ICommandExecutor commandExecutor,
-        ICommandsQueue commandsQueue)
+        public void OnCommandButtonClicked(ICommandExecutor commandExecutor, ICommandsQueue commandsQueue)
         {
             if (_commandIsPending)
             {
@@ -31,21 +30,15 @@ namespace UserControlSystem
             }
             _commandIsPending = true;
             OnCommandAccepted?.Invoke(commandExecutor);
-            _unitProducer.ProcessCommandExecutor(commandExecutor, command =>
-            ExecuteCommandWrapper(command, commandsQueue));
-            _attacker.ProcessCommandExecutor(commandExecutor, command =>
-            ExecuteCommandWrapper(command, commandsQueue));
-            _stopper.ProcessCommandExecutor(commandExecutor, command =>
-            ExecuteCommandWrapper(command, commandsQueue));
-            _mover.ProcessCommandExecutor(commandExecutor, command =>
-            ExecuteCommandWrapper(command, commandsQueue));
-            _patroller.ProcessCommandExecutor(commandExecutor, command =>
-            ExecuteCommandWrapper(command, commandsQueue));
-            _distanationResetter.ProcessCommandExecutor(commandExecutor, command =>
-            ExecuteCommandWrapper(command, commandsQueue));
-            _distanationSetter.ProcessCommandExecutor(commandExecutor, command =>
-            ExecuteCommandWrapper(command, commandsQueue));
+
+            _unitProducer.ProcessCommandExecutor(commandExecutor, command => ExecuteCommandWrapper(command, commandsQueue));
+            _attacker.ProcessCommandExecutor(commandExecutor, command => ExecuteCommandWrapper(command, commandsQueue));
+            _stopper.ProcessCommandExecutor(commandExecutor, command => ExecuteCommandWrapper(command, commandsQueue));
+            _mover.ProcessCommandExecutor(commandExecutor, command => ExecuteCommandWrapper(command, commandsQueue));
+            _patroller.ProcessCommandExecutor(commandExecutor, command => ExecuteCommandWrapper(command, commandsQueue));
+            _setRally.ProcessCommandExecutor(commandExecutor, command => ExecuteCommandWrapper(command, commandsQueue));
         }
+
         public void ExecuteCommandWrapper(object command, ICommandsQueue commandsQueue)
         {
             if (!Input.GetKey(KeyCode.LeftShift) && !Input.GetKey(KeyCode.RightShift))
@@ -70,8 +63,7 @@ namespace UserControlSystem
             _stopper.ProcessCancel();
             _mover.ProcessCancel();
             _patroller.ProcessCancel();
-            _distanationSetter.ProcessCancel();
-            _distanationResetter.ProcessCancel();
+            _setRally.ProcessCancel();
 
             OnCommandCancel?.Invoke();
         }
