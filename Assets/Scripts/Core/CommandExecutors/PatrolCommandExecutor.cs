@@ -1,13 +1,12 @@
 ﻿using Abstractions.Commands;
 using Abstractions.Commands.CommandsInterfaces;
-using Core.CommandExecutors;
 using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AI;
 using Utils;
 
-namespace Core
+namespace Core.CommandExecutors
 {
     public class PatrolCommandExecutor : CommandExecutorBase<IPatrolCommand>
     {
