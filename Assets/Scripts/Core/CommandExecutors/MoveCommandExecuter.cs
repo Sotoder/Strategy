@@ -16,16 +16,13 @@ public class MoveCommandExecuter : CommandExecutorBase<IMoveCommand>
     [SerializeField] private NavMeshObstacle _obstacle;
     [SerializeField] private HoldCommandExecutor _holdCommandExecutor;
 
-    private static readonly int Walk = Animator.StringToHash("Walk");
-    private static readonly int Idle = Animator.StringToHash("Idle");
+    private readonly int Walk = Animator.StringToHash("Walk");
+    private readonly int Idle = Animator.StringToHash("Idle");
 
     public override async Task ExecuteSpecificCommand(IMoveCommand command)
     {
         _holdCommandExecutor.Cts = new CancellationTokenSource();
 
-
-        _obstacle.enabled = false;
-        _navAgent.enabled = true;
         _navAgent.SetDestination(command.Target);
         _animator.SetTrigger(Walk);
         try
@@ -36,6 +33,7 @@ public class MoveCommandExecuter : CommandExecutorBase<IMoveCommand>
         {
             _navAgent.ResetPath();
         }
+        _holdCommandExecutor.Cts = null;
         _animator.SetTrigger(Idle);
     }
 }

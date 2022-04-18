@@ -443,7 +443,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 1e883ab43feb380479b3c6906c3cce59, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -554,6 +554,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04086624d5ce453cba36b472f17b4120, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _stop: {fileID: -4317165397797151367}
+  _animator: {fileID: 6287441856393560922}
+  _agent: {fileID: 1291557151352485220}
+  _holdCommandExecutor: {fileID: 312286327772972863}
 --- !u!114 &-4317165397797151367
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -584,7 +588,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 0.5
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1

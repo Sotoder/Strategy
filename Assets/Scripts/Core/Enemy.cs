@@ -22,4 +22,8 @@ public class Enemy : MonoBehaviour, IAttackable, IUnit
         }
     }
 
+    private void Destroy()
+    {
+        Destroy(gameObject);
+    }
 }
