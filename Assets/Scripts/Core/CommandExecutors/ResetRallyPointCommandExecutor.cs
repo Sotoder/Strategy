@@ -3,12 +3,15 @@ using Abstractions.Commands.CommandsInterfaces;
 using System.Threading.Tasks;
 using Zenject;
 
-public class ResetRallyPointCommandExecutor : CommandExecutorBase<IResetRallyPointCommand>
+namespace Core.CommandExecutors
 {
-    [Inject] private MainBuilding _mainBuilding;
-    public override Task ExecuteSpecificCommand(IResetRallyPointCommand command)
+    public class ResetRallyPointCommandExecutor : CommandExecutorBase<IResetRallyPointCommand>
     {
-        _mainBuilding.ResetRallyPoint();
-        return Task.CompletedTask;
+        [Inject] private MainBuilding _mainBuilding;
+        public override Task ExecuteSpecificCommand(IResetRallyPointCommand command)
+        {
+            _mainBuilding.ResetRallyPoint();
+            return Task.CompletedTask;
+        }
     }
 }

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6716558233618694099}
   - component: {fileID: 1652693845619904236}
   - component: {fileID: 4302388235505309535}
+  - component: {fileID: 2083176109552070814}
   m_Layer: 0
   m_Name: Gunner
   m_TagString: Untagged
@@ -97,6 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e70eaac367ed7ec4ab3f2925aa38cc5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _factionMember: {fileID: 2083176109552070814}
   _maxHealth: 100
 --- !u!65 &4302388235505309535
 BoxCollider:
@@ -111,3 +113,16 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 4.6060414, y: 3.5025904, z: 3.3370821}
   m_Center: {x: 0, y: 1.7227825, z: 0.06370497}
+--- !u!114 &2083176109552070814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6716558233620947219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb749424960380149a24c7da4c374602, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _factionId: 1

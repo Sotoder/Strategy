@@ -17,6 +17,7 @@ namespace Core.CommandExecutors
 
         [Inject] private MainBuilding _mainBuilding;
         [Inject] private DiContainer _diContainer;
+        [Inject] private FactionMember _factionMember;
 
         private ReactiveCollection<IUnitProductionTask> _queue = new ReactiveCollection<IUnitProductionTask>();
 
@@ -34,6 +35,7 @@ namespace Core.CommandExecutors
                 removeTaskAtIndex(0);
                 var newUnit = _diContainer.InstantiatePrefab(innerTask.UnitPrefab, new Vector3(this.transform.position.x - 3, 0, this.transform.position.z), Quaternion.identity, _unitsParent);
 
+                newUnit.GetComponent<FactionMember>().SetFaction(_factionMember.FactionId);
                 newUnit.GetComponent<MoveCommandExecuter>().ExecuteCommand(new MoveCommand(_mainBuilding.UnitRallyPoint));
             }
         }

@@ -8,8 +8,7 @@ namespace UserControlSystem
 {
     public sealed class UIModelInstaller : MonoInstaller
     {
-        [SerializeField]
-        private Sprite _chomperSprite;
+        [SerializeField] private Sprite _chomperSprite;
 
         public override void InstallBindings()
         {
