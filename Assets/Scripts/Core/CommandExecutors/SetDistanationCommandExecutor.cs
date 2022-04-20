@@ -5,13 +5,16 @@ using System.Threading.Tasks;
 using UnityEngine;
 using Zenject;
 
-public class SetDistanationCommandExecutor : CommandExecutorBase<ISetDistanationCommand>
+namespace Core.CommandExecutors
 {
-    [Inject] private MainBuilding _mainBuilding;
-    public override Task ExecuteSpecificCommand(ISetDistanationCommand command)
+    public class SetDistanationCommandExecutor : CommandExecutorBase<ISetDistanationCommand>
     {
-        Debug.Log($"Set distanation to {command.Target}");
-        _mainBuilding.UnitRallyPoint = command.Target;
-        return Task.CompletedTask;
+        [Inject] private MainBuilding _mainBuilding;
+        public override Task ExecuteSpecificCommand(ISetDistanationCommand command)
+        {
+            Debug.Log($"Set distanation to {command.Target}");
+            _mainBuilding.UnitRallyPoint = command.Target;
+            return Task.CompletedTask;
+        }
     }
 }

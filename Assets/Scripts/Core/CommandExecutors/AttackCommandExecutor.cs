@@ -21,6 +21,7 @@ namespace Core.CommandExecutors
         [Inject] private IHealthHolder _ourHealth;
         [Inject(Id = "AttackDistance")] private float _attackingDistance;
         [Inject(Id = "AttackPeriod")] private int _attackingPeriod;
+        [Inject] private FactionMember _factionMember;
 
         private Vector3 _ourPosition;
         private Vector3 _targetPosition;
@@ -72,6 +73,8 @@ namespace Core.CommandExecutors
         
         public override async Task ExecuteSpecificCommand(IAttackCommand command)
         {
+            if (command.Target.FactionID == _factionMember.FactionId) return;
+
             _targetTransform = (command.Target as Component).transform;
             _currentAttackOp = new AttackOperation(this, command.Target);
             Update();

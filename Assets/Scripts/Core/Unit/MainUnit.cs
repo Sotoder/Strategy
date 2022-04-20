@@ -2,6 +2,7 @@
 using Assets.Scripts.Abstractions;
 using Core.CommandExecutors;
 using UnityEngine;
+using Zenject;
 
 namespace Core
 {
@@ -12,6 +13,9 @@ namespace Core
         public Transform PivotPoint => _pivotPoint;
         public Sprite Icon => _icon;
         public int Damage => _damage;
+        public int FactionID => _factionMember.FactionId;
+
+        [Inject] private FactionMember _factionMember;
 
         [SerializeField] private Animator _animator;
         [SerializeField] private HoldCommandExecutor _stopCommand;

@@ -15,5 +15,6 @@ namespace Abstractions.Commands
         }
 
         public abstract Task ExecuteSpecificCommand(T command);
+        public void ExecuteCommand(object command) => ExecuteSpecificCommand((T)command);
     }
 }

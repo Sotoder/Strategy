@@ -13,6 +13,9 @@ public class Chomper : MonoBehaviour, ISelectable, IAttackable, IUnit, IDamageDe
     public Transform PivotPoint => _pivotPoint;
     public Sprite Icon => _icon;
     public int Damage => _damage;
+    public int FactionID => _factionMember.FactionId;
+
+    [Inject] private FactionMember _factionMember;
 
     [SerializeField] private Animator _animator;
     [SerializeField] private HoldCommandExecutor _stopCommand;
@@ -20,6 +23,7 @@ public class Chomper : MonoBehaviour, ISelectable, IAttackable, IUnit, IDamageDe
     [SerializeField] private Sprite _icon;
     [SerializeField] private Transform _pivotPoint;
     [SerializeField] private int _damage = 25;
+
     private float _health = 100;
 
 

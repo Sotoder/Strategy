@@ -18,7 +18,8 @@ namespace UserControlSystem.UI.View
         [SerializeField] private Image[] _images;
         [SerializeField] private GameObject[] _imageHolders;
         [SerializeField] private Button[] _buttons;
-        
+        [SerializeField] private Image _icon;
+
         private Subject<int> _cancelButtonClicks = new Subject<int>();
 
         private IDisposable _unitProductionTaskCt;
@@ -59,6 +60,7 @@ namespace UserControlSystem.UI.View
                     _productionProgressSlider.gameObject.SetActive(false);
                     _currentUnitName.text = string.Empty;
                     _currentUnitName.enabled = false;
+                    _icon.sprite = null;
                     _unitProductionTaskCt?.Dispose();
                 }
             }
@@ -66,12 +68,14 @@ namespace UserControlSystem.UI.View
             {
                 _imageHolders[index].SetActive(true);
                 _images[index].sprite = task.Icon;
+                
 
                 if (index == 0)
                 {
                     _productionProgressSlider.gameObject.SetActive(true);
                     _currentUnitName.text = task.UnitName;
                     _currentUnitName.enabled = true;
+                    _icon.sprite = task.Icon;
                     _unitProductionTaskCt = Observable.EveryUpdate()
                         .Subscribe(_ =>
                         {
