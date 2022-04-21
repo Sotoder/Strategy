@@ -28,6 +28,7 @@ namespace UserControlSystem
             {
                 processOnCancel();
             }
+
             _commandIsPending = true;
             OnCommandAccepted?.Invoke(commandExecutor);
 

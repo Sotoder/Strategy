@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 47868610}
   - component: {fileID: 47868611}
   - component: {fileID: 47868612}
+  - component: {fileID: 47868613}
   m_Layer: 0
   m_Name: MouseInteractionPresenter
   m_TagString: Untagged
@@ -186,6 +187,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _selectableValue: {fileID: 11400000, guid: 7141aae4b16134e49af0215b6da77bcf, type: 2}
+--- !u!114 &47868613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 47868609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d469dab317cf4d4ea53749ec5b53e8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _commandButtonsPresenter: {fileID: 1535231241}
 --- !u!1 &168921228
 GameObject:
   m_ObjectHideFlags: 0
@@ -1205,6 +1219,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1535231241 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1626032894340244491, guid: 5dd235a43d36f9347a1a35df441f10d9, type: 3}
+  m_PrefabInstance: {fileID: 1960902339}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37468374e7cf4a9989ea25c57767147c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1600457547 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1794669634523828687, guid: 5dd235a43d36f9347a1a35df441f10d9, type: 3}

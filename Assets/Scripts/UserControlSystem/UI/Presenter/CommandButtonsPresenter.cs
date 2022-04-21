@@ -18,7 +18,9 @@ namespace UserControlSystem.UI.Presenter
         [Inject] private IObservable<ISelectable> _selectedValues;
         [Inject] private CommandButtonsModel _model;
         private ISelectable _currentSelectable;
-        
+
+        public CommandButtonsModel CommandButtonsModel => _model;
+
         private void Start()
         {
             _view.OnClick += _model.OnCommandButtonClicked;

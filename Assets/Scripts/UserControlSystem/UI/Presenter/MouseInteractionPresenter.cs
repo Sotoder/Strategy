@@ -46,6 +46,9 @@ public sealed class MouseInteractionPresenter : MonoBehaviour
             if (WeHit<ISelectable>(hits, out var selectable))
             {
                 _selectedObject.SetValue(selectable);
+            } else
+            {
+                _selectedObject.SetValue(null);
             }
         });
         
