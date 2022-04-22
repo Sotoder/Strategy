@@ -8,7 +8,7 @@ using Abstractions.Executors;
 
 namespace Core
 {
-    public class ChomperCommandsQueue : MonoBehaviour, ICommandsQueue
+    public class UnitCommandsQueue : MonoBehaviour, ICommandsQueue
     {
         [Inject] CommandExecutorBase<IMoveCommand> _moveCommandExecutor;
         [Inject] CommandExecutorBase<IPatrolCommand> _patrolCommandExecutor;

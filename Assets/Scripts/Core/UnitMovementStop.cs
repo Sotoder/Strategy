@@ -14,7 +14,7 @@ namespace Core
         [SerializeField] private NavMeshAgent _agent;
         [SerializeField] private CollisionDetector _collisionDetector;
         [SerializeField] private int _throttleFrames = 60;
-        [SerializeField] private int _continuityThreshold = 10;
+        [SerializeField] private int _continuityThreshold = 5;
         
         private void Awake()
         {

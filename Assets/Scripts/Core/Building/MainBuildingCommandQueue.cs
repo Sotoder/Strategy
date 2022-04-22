@@ -7,13 +7,15 @@ namespace Core
 {
     public class MainBuildingCommandQueue : MonoBehaviour, ICommandsQueue
     {
-        [Inject] private CommandExecutorBase<IProduceUnitCommand> _produceUnitCommandExecutor;
+        [Inject] private CommandExecutorBase<IProduceChomperCommand> _produceChomperCommandExecutor;
+        [Inject] private CommandExecutorBase<IProduceGrinaderCommand> _produceGrinaderCommandExecutor;
         [Inject] private CommandExecutorBase<ISetDistanationCommand> _setDistanationExecutor;
         public void Clear() { }
         public async void EnqueueCommand(object command)
         {
-            await _produceUnitCommandExecutor.TryExecuteCommand(command);
+            await _produceChomperCommandExecutor.TryExecuteCommand(command);
             await _setDistanationExecutor.TryExecuteCommand(command);
+            await _produceGrinaderCommandExecutor.TryExecuteCommand(command);
         }
     }
 }

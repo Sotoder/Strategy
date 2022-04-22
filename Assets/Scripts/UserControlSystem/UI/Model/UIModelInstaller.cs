@@ -9,11 +9,14 @@ namespace UserControlSystem
     public sealed class UIModelInstaller : MonoInstaller
     {
         [SerializeField] private Sprite _chomperSprite;
+        [SerializeField] private Sprite _grinaderSprite;
 
         public override void InstallBindings()
         {
-            Container.Bind<CommandCreatorBase<IProduceUnitCommand>>()
-                .To<ProduceUnitCommandCommandCreator>().AsTransient();
+            Container.Bind<CommandCreatorBase<IProduceChomperCommand>>()
+                .To<ProduceChomperCommandCommandCreator>().AsTransient();
+            Container.Bind<CommandCreatorBase<IProduceGrinaderCommand>>()
+                .To<ProduceGrinaderCommandCommandCreator>().AsTransient();
             Container.Bind<CommandCreatorBase<IAttackCommand>>()
                 .To<AttackCommandCommandCreator>().AsTransient();
             Container.Bind<CommandCreatorBase<IMoveCommand>>()
@@ -30,6 +33,10 @@ namespace UserControlSystem
             Container.Bind<float>().WithId("Chomper").FromInstance(5f);
             Container.Bind<string>().WithId("Chomper").FromInstance("Chomper");
             Container.Bind<Sprite>().WithId("Chomper").FromInstance(_chomperSprite);
+
+            Container.Bind<float>().WithId("Grinader").FromInstance(8f);
+            Container.Bind<string>().WithId("Grinader").FromInstance("Grinader");
+            Container.Bind<Sprite>().WithId("Grinader").FromInstance(_grinaderSprite);
 
             Container.Bind<BottomCenterModel>().AsSingle();
         }

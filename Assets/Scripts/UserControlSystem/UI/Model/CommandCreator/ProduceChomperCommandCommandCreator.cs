@@ -6,14 +6,14 @@ using Zenject;
 
 namespace UserControlSystem
 {
-    public sealed class ProduceUnitCommandCommandCreator : CommandCreatorBase<IProduceUnitCommand>
+    public sealed class ProduceChomperCommandCommandCreator : CommandCreatorBase<IProduceChomperCommand>
     {
         [Inject] private AssetsContext _context;
         [Inject] private DiContainer _diContainer;
 
-        protected override void ClassSpecificCommandCreation(Action<IProduceUnitCommand> creationCallback)
+        protected override void ClassSpecificCommandCreation(Action<IProduceChomperCommand> creationCallback)
         {
-            var produceUnitCommand = _context.Inject(new ProduceUnitCommandHeir());
+            var produceUnitCommand = _context.Inject(new ProduceChomperCommand());
             _diContainer.Inject(produceUnitCommand);
             creationCallback?.Invoke(produceUnitCommand);
         }

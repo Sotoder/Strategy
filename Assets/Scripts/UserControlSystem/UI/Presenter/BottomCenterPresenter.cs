@@ -45,9 +45,9 @@ namespace UserControlSystem.UI.Presenter
 
                     _cancelButtonCts = view.CancelButtonClicks.Subscribe(unitProducer.Cancel);
 
-                    for (int i = 0; i < unitProducer.Queue.Count; i++)
+                    for (int i = 0; i < unitProducer.Count(); i++)
                     {
-                        view.SetTask(unitProducer.Queue[i], i);
+                        view.SetTask(unitProducer[i], i);
                     }
                 }
             });

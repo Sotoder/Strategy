@@ -176,12 +176,14 @@ GameObject:
   - component: {fileID: 1789433167}
   - component: {fileID: -1049929542943699085}
   - component: {fileID: 2026644624065116911}
+  - component: {fileID: 6105265161843759763}
   - component: {fileID: 3590708499679247348}
   - component: {fileID: 2238317541730407399}
   - component: {fileID: 1394752146}
   - component: {fileID: 1394752147}
   - component: {fileID: 28606537880527070}
   - component: {fileID: 929636103}
+  - component: {fileID: 2088326719}
   m_Layer: 0
   m_Name: MainBuilding
   m_TagString: Untagged
@@ -294,8 +296,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d55cb6fbd3f4ed88b81600129ae9071, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _unitsParent: {fileID: 0}
-  _maximumUnitsInQueue: 5
+--- !u!114 &6105265161843759763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6267617247432143541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8217e23f3d80cf245a5635e401c48d12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &3590708499679247348
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -334,6 +346,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mainBuilding: {fileID: 6267617246793001072}
   _factionMember: {fileID: 929636103}
+  _unitProducer: {fileID: 0}
 --- !u!114 &1394752147
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -377,7 +390,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb749424960380149a24c7da4c374602, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _factionId: 2
+  _factionId: 0
+--- !u!114 &2088326719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6267617247432143541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e35f98a0af3066f44b8555e32f9a5f5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _unitsParent: {fileID: 0}
+  _maximumUnitsInQueue: 5
 --- !u!1 &6267617247432143543
 GameObject:
   m_ObjectHideFlags: 0

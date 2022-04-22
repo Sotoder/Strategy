@@ -13,7 +13,8 @@ namespace UserControlSystem
         public event Action OnCommandSent;
         public event Action OnCommandCancel;
 
-        [Inject] private CommandCreatorBase<IProduceUnitCommand> _unitProducer;
+        [Inject] private CommandCreatorBase<IProduceChomperCommand> _chomperProducer;
+        [Inject] private CommandCreatorBase<IProduceGrinaderCommand> _grinaderProducer;
         [Inject] private CommandCreatorBase<IAttackCommand> _attacker;
         [Inject] private CommandCreatorBase<IStopCommand> _stopper;
         [Inject] private CommandCreatorBase<IMoveCommand> _mover;
@@ -32,7 +33,8 @@ namespace UserControlSystem
             _commandIsPending = true;
             OnCommandAccepted?.Invoke(commandExecutor);
 
-            _unitProducer.ProcessCommandExecutor(commandExecutor, command => ExecuteCommandWrapper(command, commandsQueue));
+            _chomperProducer.ProcessCommandExecutor(commandExecutor, command => ExecuteCommandWrapper(command, commandsQueue));
+            _grinaderProducer.ProcessCommandExecutor(commandExecutor, command => ExecuteCommandWrapper(command, commandsQueue));
             _attacker.ProcessCommandExecutor(commandExecutor, command => ExecuteCommandWrapper(command, commandsQueue));
             _stopper.ProcessCommandExecutor(commandExecutor, command => ExecuteCommandWrapper(command, commandsQueue));
             _mover.ProcessCommandExecutor(commandExecutor, command => ExecuteCommandWrapper(command, commandsQueue));
@@ -59,7 +61,7 @@ namespace UserControlSystem
 
         private void processOnCancel()
         {
-            _unitProducer.ProcessCancel();
+            _chomperProducer.ProcessCancel();
             _attacker.ProcessCancel();
             _stopper.ProcessCancel();
             _mover.ProcessCancel();

@@ -22,7 +22,6 @@ public class OutlineSelectorPresenter : MonoBehaviour
             return;
         }
         
-
         SetSelected(_outlineSelectors, false);
         _outlineSelectors = null;
 
@@ -40,17 +39,19 @@ public class OutlineSelectorPresenter : MonoBehaviour
         }
         
         _currentSelectable = selectable;
-        
-        static void SetSelected(OutlineSelector[] selectors, bool value)
+    }
+
+    private void SetSelected(OutlineSelector[] selectors, bool value)
+    {
+        if (selectors != null)
         {
-            if (selectors != null)
+            for (int i = 0; i < selectors.Length; i++)
             {
-                for (int i = 0; i < selectors.Length; i++)
+                if (selectors[i] != null)
                 {
                     selectors[i].SetSelected(value);
                 }
             }
         }
     }
-
 }

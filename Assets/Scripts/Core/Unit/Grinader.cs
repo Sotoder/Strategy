@@ -6,6 +6,6 @@ using UnityEngine;
 using UnityEngine.AI;
 using Zenject;
 
-public class Chomper : MainUnit
+public class Grinader : MainUnit
 {
 }
