@@ -1,9 +1,5 @@
 using Abstractions;
-using Abstractions.Executors;
-using Abstractions.Commands.CommandsInterfaces;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UniRx;
 using UnityEngine;
 using Zenject;
@@ -61,13 +57,9 @@ namespace UserControlSystem.UI.Presenter
                 return;
             }
 
-            if (selectable != null)
+            if (selectable != null && (selectable as Component).TryGetComponent<ICommandsQueue>(out var queue))
             {
-                if ((selectable as Component).TryGetComponent<ICommandsQueue>(out var queue))
-                {
-                    _currentSelectableCommandsQueue = queue;
-                }
-
+                _currentSelectableCommandsQueue = queue;
                 _currentSelectable = selectable;
             } else
             {
