@@ -10,6 +10,5 @@ namespace Core.CommandExecutors
 {
     public class ChomperHPUpgradeCommandExecutor : UpgradeHPCommandExecutor<IChomperUpgradeCommand>
     {
-
     }
 }

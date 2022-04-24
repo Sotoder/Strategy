@@ -1,4 +1,5 @@
 using Abstractions;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UniRx;
@@ -13,7 +14,8 @@ namespace Core
 
         public int MaximumUnitsInQueue => _maximumUnitsInQueue;
 
-        protected ReactiveCollection<ITask> _queue = new ReactiveCollection<ITask>();
+        private ReactiveCollection<ITask> _queue = new ReactiveCollection<ITask>();
+        private Action _reduceUpgradesCountAction; 
 
         [SerializeField] private int _maximumUnitsInQueue = 5;
 
@@ -43,6 +45,8 @@ namespace Core
             }
 
             var innerTask = (UpgradeProductionTask)_queue[0];
+            _reduceUpgradesCountAction = innerTask.ReduceUpgradesCountAction;
+
             innerTask.TimeLeft -= Time.deltaTime;
             if (innerTask.TimeLeft <= 0)
             {
@@ -60,11 +64,17 @@ namespace Core
                         }
                     }
                 }
+
+                innerTask.UnitPref.UpgradeHealth(innerTask.Amount);
             }
         }
 
 
-        public void Cancel(int index) => removeTaskAtIndex(index);
+        public void Cancel(int index)
+        {
+            _reduceUpgradesCountAction.Invoke();
+            removeTaskAtIndex(index);
+        }
 
         private void removeTaskAtIndex(int index)
         {
