@@ -1,5 +1,4 @@
 ﻿using System;
-using Abstractions;
 using Abstractions.Commands;
 using Abstractions.Commands.CommandsInterfaces;
 using UnityEngine;
@@ -20,6 +19,10 @@ namespace UserControlSystem
         [Inject] private CommandCreatorBase<IMoveCommand> _mover;
         [Inject] private CommandCreatorBase<IPatrolCommand> _patroller;
         [Inject] private CommandCreatorBase<ISetDistanationCommand> _setRally;
+        [Inject] private CommandCreatorBase<IChomperHPUpgradeCommand> _chomperHPImprover;
+        [Inject] private CommandCreatorBase<IGrinaderHPUpgradeCommand> _grinaderHPImprover;
+
+
 
         private bool _commandIsPending;
 
@@ -40,6 +43,8 @@ namespace UserControlSystem
             _mover.ProcessCommandExecutor(commandExecutor, command => ExecuteCommandWrapper(command, commandsQueue));
             _patroller.ProcessCommandExecutor(commandExecutor, command => ExecuteCommandWrapper(command, commandsQueue));
             _setRally.ProcessCommandExecutor(commandExecutor, command => ExecuteCommandWrapper(command, commandsQueue));
+            _chomperHPImprover.ProcessCommandExecutor(commandExecutor, command => ExecuteCommandWrapper(command, commandsQueue));
+            _grinaderHPImprover.ProcessCommandExecutor(commandExecutor, command => ExecuteCommandWrapper(command, commandsQueue));
         }
 
         public void ExecuteCommandWrapper(object command, ICommandsQueue commandsQueue)
@@ -67,6 +72,8 @@ namespace UserControlSystem
             _mover.ProcessCancel();
             _patroller.ProcessCancel();
             _setRally.ProcessCancel();
+            _chomperHPImprover.ProcessCancel();
+            _grinaderHPImprover.ProcessCancel();
 
             OnCommandCancel?.Invoke();
         }

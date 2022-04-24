@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 8243276165701959403}
   - component: {fileID: 1156773710133832738}
   - component: {fileID: 5334847928389357073}
+  - component: {fileID: 6008850163701428620}
   m_Layer: 0
   m_Name: Grinader
   m_TagString: Untagged
@@ -79,6 +80,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fd4fc7203083f445859e160e1bb12fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _unitTypeID: 323
   _animator: {fileID: 5388669434783888817}
   _stopCommand: {fileID: 1863482543845683668}
   _maxHealth: 200
@@ -299,6 +301,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _factionId: 0
+--- !u!114 &6008850163701428620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5388669434793363059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ba82f9b924ff2c4b90ce559962d0896, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _unit: {fileID: 804171895129713026}
+  _upgradableUnitsComposit: {fileID: 11400000, guid: f9eb3fc7f7d46f64499d3f532df13bd0, type: 2}
 --- !u!1 &7528057163650494080
 GameObject:
   m_ObjectHideFlags: 0

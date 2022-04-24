@@ -27,6 +27,11 @@ namespace UserControlSystem
                 .To<StopCommandCommandCreator>().AsTransient();
             Container.Bind<CommandCreatorBase<ISetDistanationCommand>>()
                 .To<SetDistanationCommandCommandCreator>().AsTransient();
+            Container.Bind<CommandCreatorBase<IChomperHPUpgradeCommand>>()
+                .To<UpgradeChomperHPCommandCommandCreator>().AsTransient();
+            Container.Bind<CommandCreatorBase<IGrinaderHPUpgradeCommand>>()
+                .To<UpgradeGrinaderHPCommandCommandCreator>().AsTransient();
+
 
             Container.Bind<CommandButtonsModel>().AsTransient();
             

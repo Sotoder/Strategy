@@ -6,7 +6,7 @@ using Zenject;
 
 namespace Core
 {
-    public class MainUnit : MonoBehaviour, ISelectable, IAttackable, IUnit, IDamageDealer
+    public class MainUnit : MonoBehaviour, ISelectable, IAttackable, IUnit, IDamageDealer, IUpgradableUnit
     {
         public float Health => _health;
         public float MaxHealth => _maxHealth;
@@ -14,9 +14,11 @@ namespace Core
         public Sprite Icon => _icon;
         public int Damage => _damage;
         public int FactionID => _factionMember.FactionId;
+        public int UnitTypeID => _unitTypeID;
 
         [Inject] protected FactionMember _factionMember;
 
+        [SerializeField] protected int _unitTypeID;
         [SerializeField] protected Animator _animator;
         [SerializeField] protected HoldCommandExecutor _stopCommand;
         [SerializeField] protected float _maxHealth = 100;
@@ -47,6 +49,12 @@ namespace Core
         {
             await _stopCommand.ExecuteSpecificCommand(new StopCommand());
             Destroy(gameObject);
+        }
+
+        public void UpgradeHealth(int amount)
+        {
+            _maxHealth += amount;
+            _health += amount;
         }
     }
 }

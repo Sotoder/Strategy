@@ -346,7 +346,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mainBuilding: {fileID: 6267617246793001072}
   _factionMember: {fileID: 929636103}
-  _unitProducer: {fileID: 0}
+  _unitProducer: {fileID: 2088326719}
 --- !u!114 &1394752147
 MonoBehaviour:
   m_ObjectHideFlags: 0

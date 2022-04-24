@@ -20,6 +20,8 @@ namespace UserControlSystem.UI.View
         [SerializeField] private GameObject _produceChomperButton;
         [SerializeField] private GameObject _produceGrinaderButton;
         [SerializeField] private GameObject _setRallyButton;
+        [SerializeField] private GameObject _upgradeChomperHPButton;
+        [SerializeField] private GameObject _upgradeGrinaderHPButton;
 
         private Dictionary<Type, GameObject> _buttonsByExecutorType;
 
@@ -40,6 +42,10 @@ namespace UserControlSystem.UI.View
                 .Add(typeof(ICommandExecutor<IProduceGrinaderCommand>), _produceGrinaderButton);
             _buttonsByExecutorType
                 .Add(typeof(ICommandExecutor<ISetDistanationCommand>), _setRallyButton);
+            _buttonsByExecutorType
+                .Add(typeof(ICommandExecutor<IChomperHPUpgradeCommand>), _upgradeChomperHPButton);
+            _buttonsByExecutorType
+                .Add(typeof(ICommandExecutor<IGrinaderHPUpgradeCommand>), _upgradeGrinaderHPButton);
 
             Clear();
         }
@@ -61,6 +67,8 @@ namespace UserControlSystem.UI.View
             _produceChomperButton.GetComponent<Selectable>().interactable = value;
             _produceGrinaderButton.GetComponent<Selectable>().interactable = value;
             _setRallyButton.GetComponent<Selectable>().interactable = value;
+            _upgradeChomperHPButton.GetComponent<Selectable>().interactable = value;
+            _upgradeGrinaderHPButton.GetComponent<Selectable>().interactable = value;
         }
 
         public void MakeLayout(IEnumerable<ICommandExecutor> commandExecutors, ICommandsQueue queue)
