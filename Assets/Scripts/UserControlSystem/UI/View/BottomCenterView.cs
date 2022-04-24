@@ -45,10 +45,11 @@ namespace UserControlSystem.UI.View
             _productionProgressSlider.gameObject.SetActive(false);
             _currentUnitName.text = string.Empty;
             _currentUnitName.enabled = false;
+            _icon.sprite = null;
             _unitProductionTaskCt?.Dispose();
         }
 
-        public void SetTask(IUnitProductionTask task, int index)
+        public void SetTask(ITask task, int index)
         {
             if (task == null)
             {
@@ -73,7 +74,7 @@ namespace UserControlSystem.UI.View
                 if (index == 0)
                 {
                     _productionProgressSlider.gameObject.SetActive(true);
-                    _currentUnitName.text = task.UnitName;
+                    _currentUnitName.text = task.TaskName;
                     _currentUnitName.enabled = true;
                     _icon.sprite = task.Icon;
                     _unitProductionTaskCt = Observable.EveryUpdate()

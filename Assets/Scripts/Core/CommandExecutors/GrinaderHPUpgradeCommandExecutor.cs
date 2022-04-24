@@ -4,29 +4,21 @@ using Abstractions.Commands.CommandsInterfaces;
 using Abstractions.Executors;
 using Zenject;
 using UnityEngine;
+using Abstractions;
 
 namespace Core.CommandExecutors
 {
     public class GrinaderHPUpgradeCommandExecutor : CommandExecutorBase<IGrinaderHPUpgradeCommand>
     {
-        [SerializeField] int _amountImprove;
+        [SerializeField] private int _amountImprove;
 
-        [Inject] UpgradableUnitsComposit _upgradableUnitsComposit;
-        [Inject] FactionMember _factionMember;
+        [Inject] private ITaskQueue _upgradeProducerQueue;
 
         public override Task ExecuteSpecificCommand(IGrinaderHPUpgradeCommand command)
         {
-            if (_upgradableUnitsComposit.UpgradableUnitsCollection.ContainsKey(_factionMember.FactionId))
+            if (_upgradeProducerQueue.Count() < _upgradeProducerQueue.MaximumUnitsInQueue)
             {
-                var ImproversList = _upgradableUnitsComposit.UpgradableUnitsCollection[_factionMember.FactionId];
-
-                for (int i = 0; i < ImproversList.Count; i++)
-                {
-                    if (ImproversList[i].UnitTypeID == command.UnitTypeID)
-                    {
-                        ImproversList[i].ImproveCommand(_amountImprove);
-                    }
-                }
+                _upgradeProducerQueue.Add(new UpgradeProductionTask(command.ProductionTime, command.Icon, _amountImprove, command.UnitTypeID, command.UpgradeName));
             }
             return Task.CompletedTask;
         }

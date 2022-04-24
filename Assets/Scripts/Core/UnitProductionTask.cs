@@ -3,12 +3,12 @@ using UnityEngine;
 
 namespace Core
 {
-    public class UnitProductionTask : IUnitProductionTask
+    public class UnitProductionTask : ITask
     {
         public Sprite Icon { get; }
         public float TimeLeft { get; set; }
         public float ProductionTime { get; }
-        public string UnitName { get; }
+        public string TaskName { get; }
         public GameObject UnitPrefab { get; }
 
         public UnitProductionTask(float time, Sprite icon, GameObject unitPrefab, string unitName)
@@ -17,7 +17,7 @@ namespace Core
             ProductionTime = time;
             TimeLeft = time;
             UnitPrefab = unitPrefab;
-            UnitName = unitName;
+            TaskName = unitName;
         }
     }
 }

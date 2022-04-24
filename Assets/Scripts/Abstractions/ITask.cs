@@ -1,8 +1,8 @@
 ﻿namespace Abstractions
 {
-    public interface IUnitProductionTask : IIconHolder
+    public interface ITask : IIconHolder
     {
-    	public string UnitName { get; }
+    	public string TaskName { get; }
     	public float TimeLeft { get; }
     	public float ProductionTime { get; }
     }

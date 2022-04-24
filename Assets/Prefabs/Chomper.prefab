@@ -462,7 +462,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 517786b4e7653654f89f26be8e31de69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _unitTypeID: 252
+  _unitType: 252
   _animator: {fileID: 6287441856393560922}
   _stopCommand: {fileID: 312286327772972863}
   _maxHealth: 100

@@ -9,7 +9,7 @@ namespace Core.CommandExecutors
 {
     public abstract class ProduceUnitCommandExecutor<T> : CommandExecutorBase<T> where T: class, IProduceUnitCommand
     {
-        [Inject] protected IUnitProducer _unitProducerQueue;
+        [Inject] protected ITaskQueue _unitProducerQueue;
         public override Task ExecuteSpecificCommand(T command)
         {
             if (_unitProducerQueue.Count() < _unitProducerQueue.MaximumUnitsInQueue)

@@ -2,6 +2,7 @@
 using Assets.Scripts.Abstractions;
 using Core.CommandExecutors;
 using UnityEngine;
+using Utils;
 using Zenject;
 
 namespace Core
@@ -14,11 +15,11 @@ namespace Core
         public Sprite Icon => _icon;
         public int Damage => _damage;
         public int FactionID => _factionMember.FactionId;
-        public int UnitTypeID => _unitTypeID;
+        public int UnitTypeID => (int)_unitType;
 
         [Inject] protected FactionMember _factionMember;
 
-        [SerializeField] protected int _unitTypeID;
+        [SerializeField] protected UnitTypes _unitType;
         [SerializeField] protected Animator _animator;
         [SerializeField] protected HoldCommandExecutor _stopCommand;
         [SerializeField] protected float _maxHealth = 100;

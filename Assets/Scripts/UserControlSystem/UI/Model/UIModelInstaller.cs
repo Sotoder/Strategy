@@ -43,6 +43,15 @@ namespace UserControlSystem
             Container.Bind<string>().WithId("Grinader").FromInstance("Grinader");
             Container.Bind<Sprite>().WithId("Grinader").FromInstance(_grinaderSprite);
 
+            Container.Bind<float>().WithId("GrinaderUpgrade").FromInstance(5f);
+            Container.Bind<string>().WithId("GrinaderUpgrade").FromInstance("Grinader HP upgrade");
+            Container.Bind<Sprite>().WithId("GrinaderUpgrade").FromInstance(_grinaderSprite);
+
+            Container.Bind<float>().WithId("ChomperUpgrade").FromInstance(5f);
+            Container.Bind<string>().WithId("ChomperUpgrade").FromInstance("Chomper HP upgrade");
+            Container.Bind<Sprite>().WithId("ChomperUpgrade").FromInstance(_chomperSprite);
+
+
             Container.Bind<BottomCenterModel>().AsSingle();
         }
     }

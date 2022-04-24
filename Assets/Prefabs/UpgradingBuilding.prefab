@@ -102,6 +102,7 @@ GameObject:
   - component: {fileID: 157178229343242792}
   - component: {fileID: 2319021324144399226}
   - component: {fileID: 3614233842792508641}
+  - component: {fileID: 8391021577764596780}
   m_Layer: 0
   m_Name: UpgradingBuilding
   m_TagString: Untagged
@@ -272,6 +273,7 @@ MonoBehaviour:
   _upgradabingBuilding: {fileID: 7838551390723681090}
   _factionMember: {fileID: 8191944300031164767}
   _upgradableUnitsComposit: {fileID: 11400000, guid: f9eb3fc7f7d46f64499d3f532df13bd0, type: 2}
+  _upgradeProducer: {fileID: 8391021577764596780}
 --- !u!114 &157178229343242792
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -310,6 +312,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _amountImprove: 100
+--- !u!114 &8391021577764596780
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7324161618534845675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e756f82a9fa71474b949613138b079f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maximumUnitsInQueue: 5
 --- !u!1 &7324161618534845677
 GameObject:
   m_ObjectHideFlags: 0

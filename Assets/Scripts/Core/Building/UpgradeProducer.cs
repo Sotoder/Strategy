@@ -7,7 +7,7 @@ using Zenject;
 
 namespace Core
 {
-    public class UnitProducer : MonoBehaviour, ITaskQueue
+    public class UpgradeProducer : MonoBehaviour, ITaskQueue
     {
         public IReadOnlyReactiveCollection<ITask> Queue => _queue;
 
@@ -15,12 +15,10 @@ namespace Core
 
         protected ReactiveCollection<ITask> _queue = new ReactiveCollection<ITask>();
 
-        [SerializeField] private Transform _unitsParent;
-        [SerializeField] private int _maximumUnitsInQueue = 6;
+        [SerializeField] private int _maximumUnitsInQueue = 5;
 
-        [Inject] private MainBuilding _mainBuilding;
-        [Inject] private DiContainer _diContainer;
-        [Inject] private FactionMember _factionMember;
+        [Inject] UpgradableUnitsComposit _upgradableUnitsComposit;
+        [Inject] FactionMember _factionMember;
 
         public ITask this[int index]
         {
@@ -44,17 +42,27 @@ namespace Core
                 return;
             }
 
-            var innerTask = (UnitProductionTask)_queue[0];
+            var innerTask = (UpgradeProductionTask)_queue[0];
             innerTask.TimeLeft -= Time.deltaTime;
             if (innerTask.TimeLeft <= 0)
             {
                 removeTaskAtIndex(0);
-                var newUnit = _diContainer.InstantiatePrefab(innerTask.UnitPrefab, new Vector3(this.transform.position.x - 3, 0, this.transform.position.z), Quaternion.identity, _unitsParent);
 
-                newUnit.GetComponent<FactionMember>().SetFaction(_factionMember.FactionId);
-                newUnit.GetComponent<MoveCommandExecuter>().ExecuteCommand(new MoveCommand(_mainBuilding.UnitRallyPoint));
+                if (_upgradableUnitsComposit.UpgradableUnitsCollection.ContainsKey(_factionMember.FactionId))
+                {
+                    var ImproversList = _upgradableUnitsComposit.UpgradableUnitsCollection[_factionMember.FactionId];
+
+                    for (int i = 0; i < ImproversList.Count; i++)
+                    {
+                        if (ImproversList[i].UnitTypeID == innerTask.UnitTypeID)
+                        {
+                            ImproversList[i].ImproveCommand(innerTask.Amount);
+                        }
+                    }
+                }
             }
         }
+
 
         public void Cancel(int index) => removeTaskAtIndex(index);
 
