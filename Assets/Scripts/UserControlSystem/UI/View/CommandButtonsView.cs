@@ -43,9 +43,9 @@ namespace UserControlSystem.UI.View
             _buttonsByExecutorType
                 .Add(typeof(ICommandExecutor<ISetDistanationCommand>), _setRallyButton);
             _buttonsByExecutorType
-                .Add(typeof(ICommandExecutor<IChomperHPUpgradeCommand>), _upgradeChomperHPButton);
+                .Add(typeof(ICommandExecutor<IChomperUpgradeCommand>), _upgradeChomperHPButton);
             _buttonsByExecutorType
-                .Add(typeof(ICommandExecutor<IGrinaderHPUpgradeCommand>), _upgradeGrinaderHPButton);
+                .Add(typeof(ICommandExecutor<IGrinaderUpgradeCommand>), _upgradeGrinaderHPButton);
 
             Clear();
         }

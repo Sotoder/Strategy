@@ -6,12 +6,12 @@ using Zenject;
 
 namespace UserControlSystem
 {
-    public class UpgradeChomperHPCommandCommandCreator : CommandCreatorBase<IChomperHPUpgradeCommand>
+    public class UpgradeChomperHPCommandCommandCreator : CommandCreatorBase<IChomperUpgradeCommand>
     {
         [Inject] private DiContainer _diContainer;
 
         private int _chomperID = (int)UnitTypes.Chomper;
-        protected override void ClassSpecificCommandCreation(Action<IChomperHPUpgradeCommand> creationCallback)
+        protected override void ClassSpecificCommandCreation(Action<IChomperUpgradeCommand> creationCallback)
         {
             var upgradeUnitCommand = new ChomperHPUpgradeCommand(_chomperID);
             _diContainer.Inject(upgradeUnitCommand);

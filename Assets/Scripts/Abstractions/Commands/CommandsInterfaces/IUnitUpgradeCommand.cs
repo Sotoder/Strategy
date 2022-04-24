@@ -1,7 +1,7 @@
 
 namespace Abstractions.Commands.CommandsInterfaces
 {
-    public interface IChomperHPUpgradeCommand : ICommand, IIconHolder
+    public interface IUnitUpgradeCommand : ICommand, IIconHolder
     {
         int UnitTypeID { get; }
         float ProductionTime { get; }

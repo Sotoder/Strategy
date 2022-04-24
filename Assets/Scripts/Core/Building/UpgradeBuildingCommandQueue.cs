@@ -5,8 +5,8 @@ using Zenject;
 
 public class UpgradeBuildingCommandQueue : MonoBehaviour, ICommandsQueue
 {
-    [Inject] private CommandExecutorBase<IChomperHPUpgradeCommand> _chomperHPUpgradeCommandExecutor;
-    [Inject] private CommandExecutorBase<IGrinaderHPUpgradeCommand> _grinaderHPUpgradeCommandExecutor;
+    [Inject] private CommandExecutorBase<IChomperUpgradeCommand> _chomperHPUpgradeCommandExecutor;
+    [Inject] private CommandExecutorBase<IGrinaderUpgradeCommand> _grinaderHPUpgradeCommandExecutor;
     public void Clear() { }
     public async void EnqueueCommand(object command)
     {

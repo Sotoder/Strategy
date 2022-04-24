@@ -5,7 +5,7 @@ using Zenject;
 
 namespace UserControlSystem.CommandsRealization
 {
-    public class GrinaderHPUpgradeCommand : UnitUpgradeCommand, IGrinaderHPUpgradeCommand
+    public class GrinaderHPUpgradeCommand : UnitUpgradeCommand, IGrinaderUpgradeCommand
     {
         [Inject(Id = "GrinaderUpgrade")] public string UpgradeName { get; }
         [Inject(Id = "GrinaderUpgrade")] public Sprite Icon { get; }

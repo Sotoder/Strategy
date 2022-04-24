@@ -19,8 +19,8 @@ namespace UserControlSystem
         [Inject] private CommandCreatorBase<IMoveCommand> _mover;
         [Inject] private CommandCreatorBase<IPatrolCommand> _patroller;
         [Inject] private CommandCreatorBase<ISetDistanationCommand> _setRally;
-        [Inject] private CommandCreatorBase<IChomperHPUpgradeCommand> _chomperHPImprover;
-        [Inject] private CommandCreatorBase<IGrinaderHPUpgradeCommand> _grinaderHPImprover;
+        [Inject] private CommandCreatorBase<IChomperUpgradeCommand> _chomperHPImprover;
+        [Inject] private CommandCreatorBase<IGrinaderUpgradeCommand> _grinaderHPImprover;
 
 
 

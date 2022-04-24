@@ -5,7 +5,7 @@ using Zenject;
 
 namespace UserControlSystem.CommandsRealization
 {
-    public class ChomperHPUpgradeCommand : UnitUpgradeCommand, IChomperHPUpgradeCommand
+    public class ChomperHPUpgradeCommand : UnitUpgradeCommand, IChomperUpgradeCommand
     {
         [Inject(Id = "ChomperUpgrade")] public string UpgradeName { get; }
         [Inject(Id = "ChomperUpgrade")] public Sprite Icon { get; }
