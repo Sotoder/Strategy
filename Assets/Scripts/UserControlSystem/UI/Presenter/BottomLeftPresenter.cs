@@ -16,8 +16,6 @@ namespace UserControlSystem.UI.Presenter
         [SerializeField] private Image _sliderBackground;
         [SerializeField] private Image _sliderFillImage;
 
-        private float _curentHP;
-
         [Inject] private IObservable<ISelectable> _selectedValues;
 
         private void Start()

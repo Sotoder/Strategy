@@ -24,7 +24,7 @@ namespace Core.CommandExecutors
 
             Observable.EveryUpdate().Where(_ => _innerBeam != null)
                 .Where(_ => _innerBeam.isPlaying && !_isTargetAttacked).Select(_ => target)
-                .Subscribe(_ =>
+                .Subscribe(target =>
                 {
                     if (_innerBeam.time > _innerBeam.main.duration * 0.3)
                     {
