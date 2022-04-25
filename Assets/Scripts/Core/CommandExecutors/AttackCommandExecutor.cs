@@ -15,27 +15,27 @@ namespace Core.CommandExecutors
 {
     public class AttackCommandExecutor : CommandExecutorBase<IAttackCommand>
     {
-        [SerializeField] private Animator _animator;
-        [SerializeField] private HoldCommandExecutor _stopCommandExecutor;
+        [SerializeField] protected Animator _animator;
+        [SerializeField] protected HoldCommandExecutor _stopCommandExecutor;
 
-        [Inject] private IHealthHolder _ourHealth;
-        [Inject(Id = "AttackDistance")] private float _attackingDistance;
-        [Inject(Id = "AttackPeriod")] private int _attackingPeriod;
-        [Inject] private FactionMember _factionMember;
+        [Inject] protected IHealthHolder _ourHealth;
+        [Inject(Id = "AttackDistance")] protected float _attackingDistance;
+        [Inject(Id = "AttackPeriod")] protected int _attackingPeriod;
+        [Inject] protected FactionMember _factionMember;
 
-        private Vector3 _ourPosition;
-        private Vector3 _targetPosition;
-        private Quaternion _ourRotation;
+        protected Vector3 _ourPosition;
+        protected Vector3 _targetPosition;
+        protected Quaternion _ourRotation;
 
-        private readonly Subject<Vector3> _targetPositions = new Subject<Vector3>();
-        private readonly Subject<Quaternion> _targetRotations = new Subject<Quaternion>();
-        private readonly Subject<IAttackable> _attackTargets = new Subject<IAttackable>();
+        protected readonly Subject<Vector3> _targetPositions = new Subject<Vector3>();
+        protected readonly Subject<Quaternion> _targetRotations = new Subject<Quaternion>();
+        protected readonly Subject<IAttackable> _attackTargets = new Subject<IAttackable>();
 
-        private Transform _targetTransform;
-        private AttackOperation _currentAttackOp;
+        protected Transform _targetTransform;
+        protected AttackOperation _currentAttackOp;
         
         [Inject]
-        private void Init()
+        protected void Init()
         {
             _targetPositions
                 .Select(value => new Vector3((float)Math.Round(value.x, 2), (float)Math.Round(value.y, 2), (float)Math.Round(value.z, 2)))
@@ -52,25 +52,27 @@ namespace Core.CommandExecutors
                 .Subscribe(SetAttackRotation);
         }
         
-        private void SetAttackRotation(Quaternion targetRotation)
+        protected void SetAttackRotation(Quaternion targetRotation)
         {
             transform.rotation = targetRotation;
         }
 
-        private void StartAttackingTargets(IAttackable target)
+        protected virtual void StartAttackingTargets(IAttackable target)
         {
-            GetComponent<NavMeshAgent>().isStopped = true;
-            GetComponent<NavMeshAgent>().ResetPath();
-            _animator.SetTrigger(Animator.StringToHash("Attack"));
-            target.ReceiveDamage(GetComponent<IDamageDealer>().Damage);
+            {
+                GetComponent<NavMeshAgent>().isStopped = true;
+                GetComponent<NavMeshAgent>().ResetPath();
+                _animator.SetTrigger(Animator.StringToHash("Attack"));
+                target.ReceiveDamage(GetComponent<IDamageDealer>().Damage);
+            }
         }
 
-        private void StartMovingToPosition(Vector3 position)
+        protected void StartMovingToPosition(Vector3 position)
         {
             GetComponent<NavMeshAgent>().destination = position;
             _animator.SetTrigger(Animator.StringToHash("Walk"));
         }
-        
+
         public override async Task ExecuteSpecificCommand(IAttackCommand command)
         {
             if (command.Target.FactionID == _factionMember.FactionId) return;
@@ -92,8 +94,8 @@ namespace Core.CommandExecutors
             _targetTransform = null;
             _stopCommandExecutor.Cts = null;
         }
-        
-        private void Update()
+
+        protected void Update()
         {
             if (_currentAttackOp == null)
             {
