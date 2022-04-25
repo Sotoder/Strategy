@@ -1,6 +1,4 @@
 using Abstractions;
-using System.Collections;
-using System.Collections.Generic;
 using UniRx;
 using UnityEngine;
 using Zenject;
@@ -21,6 +19,7 @@ namespace Core
         [Inject] private MainBuilding _mainBuilding;
         [Inject] private DiContainer _diContainer;
         [Inject] private FactionMember _factionMember;
+        [Inject] private UpgradesComposite _upgradesComposite;
 
         public ITask this[int index]
         {
@@ -53,6 +52,24 @@ namespace Core
 
                 newUnit.GetComponent<FactionMember>().SetFaction(_factionMember.FactionId);
                 newUnit.GetComponent<MoveCommandExecuter>().ExecuteCommand(new MoveCommand(_mainBuilding.UnitRallyPoint));
+
+                var protoUnit = newUnit.GetComponent<MainUnit>();
+
+                if (_upgradesComposite.UpgradesCollection.ContainsKey(_factionMember.FactionId))
+                {
+                    var upgradesList = _upgradesComposite.UpgradesCollection[_factionMember.FactionId];
+
+                    for (int i = 0; i < upgradesList.Count; i++)
+                    {
+                        if(upgradesList[i].UnitTypeID == protoUnit.UnitTypeID)
+                        {
+                            var healthUpgrade = upgradesList[i].Amount * upgradesList[i].UpgradeCounts;
+                            protoUnit.UpgradeHealth(healthUpgrade);
+                            break;
+                        }
+                    }
+                }
+                
             }
         }
 

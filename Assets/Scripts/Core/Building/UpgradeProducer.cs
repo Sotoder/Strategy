@@ -19,8 +19,9 @@ namespace Core
 
         [SerializeField] private int _maximumUnitsInQueue = 5;
 
-        [Inject] UpgradableUnitsComposit _upgradableUnitsComposit;
+        [Inject] UpgradableUnitsComposite _upgradableUnitsComposit;
         [Inject] FactionMember _factionMember;
+        [Inject] UpgradesComposite _upgradesComposite;
 
         public ITask this[int index]
         {
@@ -65,10 +66,35 @@ namespace Core
                     }
                 }
 
-                innerTask.UnitPref.UpgradeHealth(innerTask.Amount);
+                AddOrUpdateUpgradeModel(innerTask);
             }
         }
 
+        private void AddOrUpdateUpgradeModel(UpgradeProductionTask innerTask)
+        {
+            lock (_upgradesComposite.UpgradesCollection)
+            {
+                if (!_upgradesComposite.UpgradesCollection.ContainsKey(_factionMember.FactionId))
+                {
+                    _upgradesComposite.UpgradesCollection.Add(_factionMember.FactionId, new List<UpgradeModel>());
+                    _upgradesComposite.UpgradesCollection[_factionMember.FactionId].Add(new UpgradeModel(innerTask.Amount, innerTask.UpgradeID, innerTask.UnitTypeID, 1));
+                    return;
+                }
+
+                var upgradesList = _upgradesComposite.UpgradesCollection[_factionMember.FactionId];
+
+                for ( int i = 0; i < upgradesList.Count; i++)
+                {
+                    if (upgradesList[i].UpgradeID == innerTask.UpgradeID)
+                    {
+                        upgradesList[i].UpgradeCounts++;
+                        return;
+                    }
+                }
+
+                upgradesList.Add(new UpgradeModel(innerTask.Amount, innerTask.UpgradeID, innerTask.UnitTypeID, 1));
+            }
+        }
 
         public void Cancel(int index)
         {

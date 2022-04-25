@@ -301,6 +301,7 @@ MonoBehaviour:
   _amountImprove: 50
   _maxUpgradesCount: 3
   _unitPref: {fileID: -7720783232501576027, guid: 9a14e11fe7e23784fb5e913d6bb456ee, type: 3}
+  _upgradeID: 11
 --- !u!114 &3614233842792508641
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -316,6 +317,7 @@ MonoBehaviour:
   _amountImprove: 100
   _maxUpgradesCount: 5
   _unitPref: {fileID: 804171895129713026, guid: 2e5ff28f4dabc85438dd5f08f2605bd3, type: 3}
+  _upgradeID: 10
 --- !u!114 &8391021577764596780
 MonoBehaviour:
   m_ObjectHideFlags: 0

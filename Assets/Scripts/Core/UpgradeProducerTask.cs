@@ -12,10 +12,10 @@ namespace Core
         public string TaskName { get; }
         public int Amount { get; }
         public int UnitTypeID { get; }
-        public MainUnit UnitPref { get; }
+        public int UpgradeID { get; }
         public Action ReduceUpgradesCountAction { get; }
 
-        public UpgradeProductionTask(float time, Sprite icon, int amount, int unitTypeID, string taskName, MainUnit unitPref, Action reduceUpgradesCountAction)
+        public UpgradeProductionTask(float time, Sprite icon, int amount, int unitTypeID, string taskName, int upgradeID, Action reduceUpgradesCountAction)
         {
             Icon = icon;
             ProductionTime = time;
@@ -23,7 +23,7 @@ namespace Core
             Amount = amount;
             UnitTypeID = unitTypeID;
             TaskName = taskName;
-            UnitPref = unitPref;
+            UpgradeID = upgradeID;
             ReduceUpgradesCountAction = reduceUpgradesCountAction;
         }
     }

@@ -7,7 +7,7 @@ namespace Core
     public class HPInprover : MonoBehaviour
     {
         [SerializeField] private MainUnit _unit;
-        [SerializeField] private UpgradableUnitsComposit _upgradableUnitsComposit;
+        [SerializeField] private UpgradableUnitsComposite _upgradableUnitsComposit;
 
         public int UnitTypeID => _unit.UnitTypeID;
 

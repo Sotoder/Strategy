@@ -13,7 +13,7 @@ using Zenject;
 
 namespace Core.CommandExecutors
 {
-    public class AttackCommandExecutor : CommandExecutorBase<IAttackCommand>
+    public abstract class AttackCommandExecutor : CommandExecutorBase<IAttackCommand>
     {
         [SerializeField] protected Animator _animator;
         [SerializeField] protected HoldCommandExecutor _stopCommandExecutor;
@@ -57,15 +57,16 @@ namespace Core.CommandExecutors
             transform.rotation = targetRotation;
         }
 
-        protected virtual void StartAttackingTargets(IAttackable target)
+        protected void StartAttackingTargets(IAttackable target)
         {
-            {
-                GetComponent<NavMeshAgent>().isStopped = true;
-                GetComponent<NavMeshAgent>().ResetPath();
-                _animator.SetTrigger(Animator.StringToHash("Attack"));
-                target.ReceiveDamage(GetComponent<IDamageDealer>().Damage);
-            }
+            
+            GetComponent<NavMeshAgent>().isStopped = true;
+            GetComponent<NavMeshAgent>().ResetPath();
+            _animator.SetTrigger(Animator.StringToHash("Attack"));
+            DealDamageToTarget(target);
         }
+
+        protected abstract void DealDamageToTarget(IAttackable target);
 
         protected void StartMovingToPosition(Vector3 position)
         {

@@ -11,7 +11,7 @@ namespace Core.CommandExecutors
     {
         [SerializeField] protected int _amountImprove;
         [SerializeField] private int _maxUpgradesCount;
-        [SerializeField] private MainUnit _unitPref;
+        [SerializeField] private int _upgradeID;
 
         private int _upgradesCount;
 
@@ -24,7 +24,7 @@ namespace Core.CommandExecutors
             if (_upgradeProducerQueue.Count() < _upgradeProducerQueue.MaximumUnitsInQueue)
             {
                 _upgradeProducerQueue.Add(new UpgradeProductionTask(command.ProductionTime, command.Icon, _amountImprove, 
-                    command.UnitTypeID, command.UpgradeName, _unitPref, ReduceUpgradesCount));
+                    command.UnitTypeID, command.UpgradeName, _upgradeID, ReduceUpgradesCount));
                 _upgradesCount++;
             }
             return Task.CompletedTask;
