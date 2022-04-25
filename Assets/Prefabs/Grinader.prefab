@@ -3788,7 +3788,7 @@ ParticleSystem:
     quality: 0
     voxelSize: 0.5
     collisionMessages: 0
-    collidesWithDynamic: 0
+    collidesWithDynamic: 1
     interiorCollisions: 0
   TriggerModule:
     enabled: 0
@@ -5610,7 +5610,7 @@ ParticleSystem:
     arc:
       value: 360
       mode: 0
-      spread: 0.7
+      spread: 0.35
       speed:
         serializedVersion: 2
         minMaxState: 0
@@ -8593,7 +8593,7 @@ ParticleSystem:
     quality: 0
     voxelSize: 0.5
     collisionMessages: 0
-    collidesWithDynamic: 0
+    collidesWithDynamic: 1
     interiorCollisions: 0
   TriggerModule:
     enabled: 0
@@ -11023,8 +11023,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 4.60616, y: 5.174692, z: 3.2390897}
-  m_Center: {x: 0.00000011920929, y: 2.4224372, z: 0.111154884}
+  m_Size: {x: 4.60616, y: 3.5706758, z: 3.2390897}
+  m_Center: {x: 0, y: 1.620429, z: 0.111154914}
 --- !u!54 &7528057163650494169
 Rigidbody:
   m_ObjectHideFlags: 0
