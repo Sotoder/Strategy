@@ -1,5 +1,6 @@
 using Abstractions.Commands.CommandsInterfaces;
 using Assets.Scripts.Abstractions;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using UniRx;
@@ -15,6 +16,7 @@ namespace Core.CommandExecutors
         [SerializeField] private ParticleSystem _outerBeam;
 
         private bool _isTargetAttacked;
+        IDisposable _disposableFlow;
 
         protected override void DealDamageToTarget(IAttackable target)
         {
@@ -22,14 +24,15 @@ namespace Core.CommandExecutors
             _outerBeam.Play();
             _innerBeam.Play();
 
-            Observable.EveryUpdate().Where(_ => _innerBeam != null)
-                .Where(_ => _innerBeam.isPlaying && !_isTargetAttacked).Select(_ => target)
-                .Subscribe(target =>
+            _disposableFlow = Observable.EveryUpdate().Where(_ => _innerBeam != null)
+                .Where(_ => _innerBeam.isPlaying && !_isTargetAttacked)
+                .Subscribe(_ =>
                 {
                     if (_innerBeam.time > _innerBeam.main.duration * 0.3)
                     {
                         target.ReceiveDamage(GetComponent<IDamageDealer>().Damage);
                         _isTargetAttacked = true;
+                        _disposableFlow.Dispose();
                     }
                 });
         }
@@ -41,6 +44,7 @@ namespace Core.CommandExecutors
             _outerBeam.Stop();
             _innerBeam.Stop();
             _isTargetAttacked = false;
+            _disposableFlow?.Dispose();
         }
     }
 }

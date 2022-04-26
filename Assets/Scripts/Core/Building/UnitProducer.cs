@@ -63,9 +63,7 @@ namespace Core
                     {
                         if(upgradesList[i].UnitTypeID == protoUnit.UnitTypeID)
                         {
-                            var healthUpgrade = upgradesList[i].Amount * upgradesList[i].UpgradeCounts;
-                            protoUnit.UpgradeHealth(healthUpgrade);
-                            break;
+                            upgradesList[i].AplyUpgrade(protoUnit);
                         }
                     }
                 }
