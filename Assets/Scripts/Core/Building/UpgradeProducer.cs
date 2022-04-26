@@ -76,7 +76,7 @@ namespace Core
             {
                 if (!_upgradesComposite.UpgradesCollection.ContainsKey(_factionMember.FactionId))
                 {
-                    _upgradesComposite.UpgradesCollection.Add(_factionMember.FactionId, new List<UpgradeModel>());
+                    _upgradesComposite.UpgradesCollection.Add(_factionMember.FactionId, new List<IUpgradeModel>());
                     _upgradesComposite.UpgradesCollection[_factionMember.FactionId].Add(new UpgradeModel(innerTask.Amount, innerTask.UpgradeID, innerTask.UnitTypeID, 1));
                     return;
                 }
@@ -87,7 +87,7 @@ namespace Core
                 {
                     if (upgradesList[i].UpgradeID == innerTask.UpgradeID)
                     {
-                        upgradesList[i].UpgradeCounts++;
+                        upgradesList[i].IncreaseUpgradeLevel();
                         return;
                     }
                 }

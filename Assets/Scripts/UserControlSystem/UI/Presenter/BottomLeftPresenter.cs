@@ -29,7 +29,7 @@ namespace UserControlSystem.UI.Presenter
             _healthSlider.gameObject.SetActive(selected != null);
             _text.enabled = selected != null;
 
-            Observable.EveryUpdate().Where(_ => selected != null).Select(_ => selected).Subscribe(UpdateLeftView);
+            Observable.EveryUpdate().Where(_ => selected != null).Select(_ => selected).Subscribe(UpdateLeftView).AddTo(this);
         }
 
         private void UpdateLeftView(ISelectable selected)

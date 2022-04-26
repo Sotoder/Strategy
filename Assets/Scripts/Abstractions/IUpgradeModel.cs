@@ -3,8 +3,9 @@ namespace Abstractions
 {
     public interface IUpgradeModel
     {
-        void AplyUpgrade(IUpgradableUnit unit);
-        int UpgradeCounts { get; set; }
+        void ApplyUpgrade(IUpgradableUnit unit);
+        void IncreaseUpgradeLevel();
+        int UpgradeLevel { get; }
         int Amount { get; }
         int UpgradeID { get; }
         int UnitTypeID { get; }

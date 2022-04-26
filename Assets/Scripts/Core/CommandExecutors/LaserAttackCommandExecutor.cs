@@ -34,7 +34,7 @@ namespace Core.CommandExecutors
                         _isTargetAttacked = true;
                         _disposableFlow.Dispose();
                     }
-                });
+                }).AddTo(this);
         }
 
 

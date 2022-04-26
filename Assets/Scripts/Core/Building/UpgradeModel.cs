@@ -8,7 +8,7 @@ namespace Core
         private int _upgradeID;
         private int _unitTypeID;
 
-        public int UpgradeCounts { get; set; }
+        public int UpgradeLevel { get; private set; }
         public int Amount => _amount;
         public int UpgradeID => _upgradeID;
         public int UnitTypeID => _unitTypeID;
@@ -18,13 +18,18 @@ namespace Core
             _amount = amount;
             _upgradeID = upgradeID;
             _unitTypeID = unitTypeID;
-            UpgradeCounts = upgradeCounts;
+            UpgradeLevel = upgradeCounts;
         }
 
-        public void AplyUpgrade(IUpgradableUnit protoUnit)
+        public void ApplyUpgrade(IUpgradableUnit protoUnit)
         {
-            var healthUpgrade = _amount * UpgradeCounts;
+            var healthUpgrade = _amount * UpgradeLevel;
             protoUnit.UpgradeHealth(healthUpgrade);
+        }
+
+        public void IncreaseUpgradeLevel()
+        {
+            UpgradeLevel++;
         }
     }
 }

@@ -47,33 +47,37 @@ namespace Core
             innerTask.TimeLeft -= Time.deltaTime;
             if (innerTask.TimeLeft <= 0)
             {
-                removeTaskAtIndex(0);
+                RemoveTaskAtIndex(0);
                 var newUnit = _diContainer.InstantiatePrefab(innerTask.UnitPrefab, new Vector3(this.transform.position.x - 3, 0, this.transform.position.z), Quaternion.identity, _unitsParent);
 
                 newUnit.GetComponent<FactionMember>().SetFaction(_factionMember.FactionId);
                 newUnit.GetComponent<MoveCommandExecuter>().ExecuteCommand(new MoveCommand(_mainBuilding.UnitRallyPoint));
 
-                var protoUnit = newUnit.GetComponent<MainUnit>();
+                var upgradableUnit = newUnit.GetComponent<IUpgradableUnit>();
 
-                if (_upgradesComposite.UpgradesCollection.ContainsKey(_factionMember.FactionId))
+                if (_upgradesComposite.IsUnitHaveAnyUpgrade(upgradableUnit))
                 {
-                    var upgradesList = _upgradesComposite.UpgradesCollection[_factionMember.FactionId];
-
-                    for (int i = 0; i < upgradesList.Count; i++)
-                    {
-                        if(upgradesList[i].UnitTypeID == protoUnit.UnitTypeID)
-                        {
-                            upgradesList[i].AplyUpgrade(protoUnit);
-                        }
-                    }
+                    ApplayAllUpgrades(upgradableUnit);
                 }
-                
             }
         }
 
-        public void Cancel(int index) => removeTaskAtIndex(index);
+        private void ApplayAllUpgrades(IUpgradableUnit upgradableUnit)
+        {
+            var upgradesList = _upgradesComposite.UpgradesCollection[upgradableUnit.FactionID];
 
-        private void removeTaskAtIndex(int index)
+            for (int i = 0; i < upgradesList.Count; i++)
+            {
+                if (upgradesList[i].UnitTypeID == upgradableUnit.UnitTypeID)
+                {
+                    upgradesList[i].ApplyUpgrade(upgradableUnit);
+                }
+            }
+        }
+
+        public void Cancel(int index) => RemoveTaskAtIndex(index);
+
+        private void RemoveTaskAtIndex(int index)
         {
             for (int i = index; i < _queue.Count - 1; i++)
             {

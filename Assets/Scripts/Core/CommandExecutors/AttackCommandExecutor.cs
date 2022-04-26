@@ -164,7 +164,7 @@ namespace Core.CommandExecutors
             			if (
                 			_attackCommandExecutor == null
                 			|| _attackCommandExecutor._ourHealth.Health == 0
-                			|| _target.Health == 0
+                			|| _target.Health <= 0
                 			|| _isCancelled
                 			)
             			{
@@ -194,8 +194,8 @@ namespace Core.CommandExecutors
             			else if (ourRotation != Quaternion.LookRotation(vector))
             			{
                 			_attackCommandExecutor.
-						_targetRotations
-						.OnNext(Quaternion.LookRotation(vector));
+						    _targetRotations
+						    .OnNext(Quaternion.LookRotation(vector));
             			}
             			else
             			{
