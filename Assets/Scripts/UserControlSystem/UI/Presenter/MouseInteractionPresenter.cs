@@ -50,7 +50,7 @@ public sealed class MouseInteractionPresenter : MonoBehaviour
             {
                 _selectedObject.SetValue(null);
             }
-        });
+        }).AddTo(this);
         
         rmbHitsStream.Subscribe((ray, hits) =>
         {
@@ -62,7 +62,7 @@ public sealed class MouseInteractionPresenter : MonoBehaviour
             {
                 _groundClicksRMB.SetValue(ray.origin + ray.direction * enter);
             }
-        });
+        }).AddTo(this);
     }
     
     private bool WeHit<T>(RaycastHit[] hits, out T result) where T : class
