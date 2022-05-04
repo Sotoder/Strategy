@@ -2,11 +2,12 @@
 using Assets.Scripts.Abstractions;
 using Core.CommandExecutors;
 using UnityEngine;
+using Utils;
 using Zenject;
 
 namespace Core
 {
-    public class MainUnit : MonoBehaviour, ISelectable, IAttackable, IUnit, IDamageDealer
+    public class MainUnit : MonoBehaviour, ISelectable, IAttackable, IUnit, IDamageDealer, IUpgradableUnit
     {
         public float Health => _health;
         public float MaxHealth => _maxHealth;
@@ -14,18 +15,23 @@ namespace Core
         public Sprite Icon => _icon;
         public int Damage => _damage;
         public int FactionID => _factionMember.FactionId;
+        public int UnitTypeID => (int)_unitType;
 
-        [Inject] private FactionMember _factionMember;
+        [Inject] protected FactionMember _factionMember;
 
-        [SerializeField] private Animator _animator;
-        [SerializeField] private HoldCommandExecutor _stopCommand;
-        [SerializeField] private float _maxHealth = 100;
-        [SerializeField] private Sprite _icon;
-        [SerializeField] private Transform _pivotPoint;
-        [SerializeField] private int _damage = 25;
-        private float _health = 100;
+        [SerializeField] protected UnitTypes _unitType;
+        [SerializeField] protected Animator _animator;
+        [SerializeField] protected HoldCommandExecutor _stopCommand;
+        [SerializeField] protected float _maxHealth = 100;
+        [SerializeField] protected Sprite _icon;
+        [SerializeField] protected Transform _pivotPoint;
+        [SerializeField] protected int _damage = 25;
+        protected float _health;
 
-
+        protected void Start()
+        {
+            _health = _maxHealth;
+        }
         public void ReceiveDamage(int amount)
         {
             if (_health <= 0)
@@ -40,10 +46,16 @@ namespace Core
             }
         }
 
-        private async void Destroy()
+        protected async void Destroy()
         {
             await _stopCommand.ExecuteSpecificCommand(new StopCommand());
             Destroy(gameObject);
+        }
+
+        public void UpgradeHealth(int amount)
+        {
+            _maxHealth += amount;
+            _health += amount;
         }
     }
 }

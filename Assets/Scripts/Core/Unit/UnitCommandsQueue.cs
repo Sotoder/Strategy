@@ -4,10 +4,11 @@ using Abstractions.Commands;
 using Abstractions.Commands.CommandsInterfaces;
 using UniRx;
 using System;
+using Abstractions.Executors;
 
 namespace Core
 {
-    public class ChomperCommandsQueue : MonoBehaviour, ICommandsQueue
+    public class UnitCommandsQueue : MonoBehaviour, ICommandsQueue
     {
         [Inject] CommandExecutorBase<IMoveCommand> _moveCommandExecutor;
         [Inject] CommandExecutorBase<IPatrolCommand> _patrolCommandExecutor;

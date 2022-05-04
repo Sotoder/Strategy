@@ -18,7 +18,7 @@ namespace Core
         [SerializeField] private Sprite _icon;
         [SerializeField] private Transform _pivotPoint;
 
-        private float _health = 1000;
+        private float _health;
 
         public Vector3 UnitRallyPoint;
 
@@ -28,6 +28,7 @@ namespace Core
         {
             _baseRallyPoint = new Vector3(this.transform.position.x - 3, 0, this.transform.position.z);
             UnitRallyPoint = _baseRallyPoint;
+            _health = _maxHealth;
         }
 
         public void ResetRallyPoint()

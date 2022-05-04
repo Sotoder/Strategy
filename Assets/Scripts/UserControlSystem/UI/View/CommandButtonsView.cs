@@ -17,8 +17,11 @@ namespace UserControlSystem.UI.View
         [SerializeField] private GameObject _moveButton;
         [SerializeField] private GameObject _patrolButton;
         [SerializeField] private GameObject _stopButton;
-        [SerializeField] private GameObject _produceUnitButton;
+        [SerializeField] private GameObject _produceChomperButton;
+        [SerializeField] private GameObject _produceGrinaderButton;
         [SerializeField] private GameObject _setRallyButton;
+        [SerializeField] private GameObject _upgradeChomperHPButton;
+        [SerializeField] private GameObject _upgradeGrinaderHPButton;
 
         private Dictionary<Type, GameObject> _buttonsByExecutorType;
 
@@ -34,9 +37,15 @@ namespace UserControlSystem.UI.View
             _buttonsByExecutorType
                 .Add(typeof(ICommandExecutor<IStopCommand>), _stopButton);
             _buttonsByExecutorType
-                .Add(typeof(ICommandExecutor<IProduceUnitCommand>), _produceUnitButton);
+                .Add(typeof(ICommandExecutor<IProduceChomperCommand>), _produceChomperButton);
+            _buttonsByExecutorType
+                .Add(typeof(ICommandExecutor<IProduceGrinaderCommand>), _produceGrinaderButton);
             _buttonsByExecutorType
                 .Add(typeof(ICommandExecutor<ISetDistanationCommand>), _setRallyButton);
+            _buttonsByExecutorType
+                .Add(typeof(ICommandExecutor<IChomperUpgradeCommand>), _upgradeChomperHPButton);
+            _buttonsByExecutorType
+                .Add(typeof(ICommandExecutor<IGrinaderUpgradeCommand>), _upgradeGrinaderHPButton);
 
             Clear();
         }
@@ -55,8 +64,11 @@ namespace UserControlSystem.UI.View
             _moveButton.GetComponent<Selectable>().interactable = value;
             _patrolButton.GetComponent<Selectable>().interactable = value;
             _stopButton.GetComponent<Selectable>().interactable = value;
-            _produceUnitButton.GetComponent<Selectable>().interactable = value;
+            _produceChomperButton.GetComponent<Selectable>().interactable = value;
+            _produceGrinaderButton.GetComponent<Selectable>().interactable = value;
             _setRallyButton.GetComponent<Selectable>().interactable = value;
+            _upgradeChomperHPButton.GetComponent<Selectable>().interactable = value;
+            _upgradeGrinaderHPButton.GetComponent<Selectable>().interactable = value;
         }
 
         public void MakeLayout(IEnumerable<ICommandExecutor> commandExecutors, ICommandsQueue queue)

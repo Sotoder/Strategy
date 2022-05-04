@@ -46,8 +46,11 @@ public sealed class MouseInteractionPresenter : MonoBehaviour
             if (WeHit<ISelectable>(hits, out var selectable))
             {
                 _selectedObject.SetValue(selectable);
+            } else
+            {
+                _selectedObject.SetValue(null);
             }
-        });
+        }).AddTo(this);
         
         rmbHitsStream.Subscribe((ray, hits) =>
         {
@@ -59,7 +62,7 @@ public sealed class MouseInteractionPresenter : MonoBehaviour
             {
                 _groundClicksRMB.SetValue(ray.origin + ray.direction * enter);
             }
-        });
+        }).AddTo(this);
     }
     
     private bool WeHit<T>(RaycastHit[] hits, out T result) where T : class

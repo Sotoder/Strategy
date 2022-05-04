@@ -1,5 +1,6 @@
 ﻿using Abstractions.Commands;
 using Abstractions.Commands.CommandsInterfaces;
+using Abstractions.Executors;
 using Core;
 using System.Threading;
 using System.Threading.Tasks;
@@ -8,32 +9,35 @@ using UnityEngine.AI;
 using Utils;
 using Zenject;
 
-public class MoveCommandExecuter : CommandExecutorBase<IMoveCommand>
+namespace Core
 {
-    [SerializeField] private UnitMovementStop _stop;
-    [SerializeField] private Animator _animator;
-    [SerializeField] private NavMeshAgent _navAgent;
-    [SerializeField] private NavMeshObstacle _obstacle;
-    [SerializeField] private HoldCommandExecutor _holdCommandExecutor;
-
-    private readonly int Walk = Animator.StringToHash("Walk");
-    private readonly int Idle = Animator.StringToHash("Idle");
-
-    public override async Task ExecuteSpecificCommand(IMoveCommand command)
+    public class MoveCommandExecuter : CommandExecutorBase<IMoveCommand>
     {
-        _holdCommandExecutor.Cts = new CancellationTokenSource();
+        [SerializeField] private UnitMovementStop _stop;
+        [SerializeField] private Animator _animator;
+        [SerializeField] private NavMeshAgent _navAgent;
+        [SerializeField] private NavMeshObstacle _obstacle;
+        [SerializeField] private HoldCommandExecutor _holdCommandExecutor;
 
-        _navAgent.SetDestination(command.Target);
-        _animator.SetTrigger(Walk);
-        try
+        private readonly int Walk = Animator.StringToHash("Walk");
+        private readonly int Idle = Animator.StringToHash("Idle");
+
+        public override async Task ExecuteSpecificCommand(IMoveCommand command)
         {
-            await _stop.WithCancellation(_holdCommandExecutor.Cts.Token);
+            _holdCommandExecutor.Cts = new CancellationTokenSource();
+
+            _navAgent.SetDestination(command.Target);
+            _animator.SetTrigger(Walk);
+            try
+            {
+                await _stop.WithCancellation(_holdCommandExecutor.Cts.Token);
+            }
+            catch
+            {
+                _navAgent.ResetPath();
+            }
+            _holdCommandExecutor.Cts = null;
+            _animator.SetTrigger(Idle);
         }
-        catch
-        {
-            _navAgent.ResetPath();
-        }
-        _holdCommandExecutor.Cts = null;
-        _animator.SetTrigger(Idle);
     }
 }
